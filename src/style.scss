@@ -1,0 +1,90 @@
+$theme-color: #81E7EB;
+$active-link-color: #472F9C;
+html {
+  min-height: 100%; //fill linear gradient
+}
+body {
+  background-color: white;
+  background: linear-gradient($theme-color, white 80em);
+  margin: auto;
+  max-width: 36em;
+  padding: 0 1em;
+  font: 1.1em/1.62em "Courier", "Courier-new", sans-serif, monospace;
+  color: white;
+  a {
+    color: inherit;
+    font-weight: normal;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:active {
+      color: $active-link-color;
+      text-decoration: none;
+    }
+  }
+}
+nav {
+  display: flex;
+  font-size: 1.2em;
+  justify-content: space-between;
+  margin-top: 2em;
+  margin-bottom: 3.2em;
+  h1 {
+    font-size: 2.5em;
+    a:hover {
+      text-decoration: none;
+    }
+    .huge {
+      vertical-align: middle;
+      font-size: 1.5em;
+    }
+  }
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+    padding-left: 0px;
+    li {
+      margin: auto 1em auto 0;
+      font-size: 0.9em;
+    }
+  }
+}
+h1,h2,h3 {
+  line-height: 1.2em;
+  letter-spacing: -0.025em;
+}
+div.content {
+  h1,h2,h3 {
+  font-size: 1.5em;
+  }
+  button {
+    font-family: inherit;
+    font-size: 1em;
+    background: transparent;
+    border: 4px solid white;
+    border-radius: 0.75em;
+    padding: 0.5em;
+    color: inherit; // why do I need this, WTF is color: buttonext?
+  }
+  form.add-numbers input:invalid {
+    color: #FF2F4E;
+  }
+}
+@media print{
+  body {
+    max-width: none
+  }
+}
+@media (max-width: 640px) {
+  nav {
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    ul {
+      margin: inherit;
+    }
+  }
+}
