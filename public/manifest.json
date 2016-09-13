@@ -1,0 +1,22 @@
+{
+  "dir": "ltr",
+  "lang": "en",
+  "name": "Brunch.us",
+  "short_name": "Brunch.us",
+  "description": "decide on brunch with friends",
+  "scope": "/",
+  "display": "fullscreen",
+  "orientation": "any",
+  "start_url": "/",
+  "theme_color": "#81E7EB",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "background_color": "#81E7EB",
+  "icons": [
+    {
+      "src": "images/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ]
+}
