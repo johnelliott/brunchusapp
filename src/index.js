@@ -1,10 +1,36 @@
-console.log('script is running')
-
+console.log('script running')
 const form = document.getElementById('form') // make this by ID
-console.log('form is of type %s, here it is: %s', typeof form, form)
+const addPhoneFieldsNodeList = document.getElementsByClassName('phone-fill')
+const addPhoneFields = Array.prototype.slice.call(addPhoneFieldsNodeList)
+
+// Set up red underline visual feedback clearing
+for (let field of addPhoneFields) {
+  field.addEventListener('input', function (evt) {
+    if (evt.target.classList.contains('invalid-form')) {
+      console.log('we have one with invalid-form class')
+      evt.target.classList.remove('invalid-form')
+      console.log('invalid visual feedback removed on input')
+    }
+  })
+}
 
 form.addEventListener('submit', function (evt) {
+  console.log('submit event')
   evt.preventDefault()
-  console.log('event fired!')
-  console.log('hello this fir is sick', evt)
+  if (form.checkValidity() === false) {
+    for (let field of addPhoneFields) {
+      console.log('field: %s is valid? %s', field, field.validity.valid)
+      if (field.value.length > 0 && !field.validity.valid) {
+        console.log('invalid field')
+        console.log('phone field is valid? ', field.validity.valid)
+        if (!field.validity.valid) {
+          field.classList.add('invalid-form')
+        }
+      }
+    }
+  } else {
+    console.log('form is valid')
+    // TODO call POST function or something
+    return false
+  }
 })
