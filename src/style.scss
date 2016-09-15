@@ -1,7 +1,6 @@
 $theme-color: #81E7EB;
-$theme-dark-grey: #4e5159;
-$theme-dark-grey-generic-RGB: #42464C;
-$theme-dark-grey-clear:rgba(78, 81, 89, 0.6);
+$theme-dark-grey: #222327;
+$theme-dark-grey-clear:rgba(78, 81, 89, 0.7);
 $theme-active-link-color: #472F9C;
 $theme-problem-red: #FF2F4E;
 
@@ -48,14 +47,17 @@ nav {
   display: flex;
   font-size: 1.2em;
   justify-content: center;
-  margin-top: 1.75em;
-  margin-bottom: 3.2em;
-  @media (orientation: landscape) {
-    margin-top: auto;
-    margin-bottom: auto;
+  @media (min-height: 500px) {
+    margin: 1.25em inherit;
   }
   h1 {
-    font-size: 1.75em;
+    margin-top: 1.5em;
+    @media (min-width: 768px) {
+      font-size: 3em;
+    }
+    @media (max-height: 350px) {
+      margin-top: 1em;
+    }
     a:hover {
       text-decoration: none;
     }
@@ -88,9 +90,15 @@ div.content {
     padding: 0.25em;
     margin: 0.5em;
     color: inherit; // why do I need this, WTF is color: buttonext?
+    vertical-align: middle;
     &:focus {
       outline: none;
     }
+    // &:-webkit-autofill {
+    //   // background-color: transparent !important;
+    //   // -webkit-box-shadow: 0 0 0px 50px $theme-color inset; // Hack because of sticky yellow
+    //   // -webkit-text-fill-color: $theme-dark-grey;
+    // }
     &[type=tel] {
       border-top: none;
       border-right: none;
@@ -126,23 +134,3 @@ div.content {
   }
 }
 
-@media (max-width: 640px) { //TODO make this go away, don't need it
-  nav {
-    flex-flow: column nowrap;
-    align-items: flex-start;
-    margin-top: 0.5em;
-    margin-bottom: 1em;
-    ul {
-      margin: inherit;
-      text-align: center;
-    }
-  }
-}
-
-@media (min-width: 640px) {
-  nav {
-    h1 {
-      font-size: 3em;
-    }
-  }
-}
