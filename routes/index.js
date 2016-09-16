@@ -1,6 +1,3 @@
-// const url = require('url')
-// const path = require('path')
-// const request = require('request')
 const fs = require('fs')
 const crypto = require('crypto')
 const express = require('express')
@@ -17,12 +14,16 @@ const validUsPhone = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02
 const recs = JSON.parse(fs.readFileSync(`lib/recommendations.json`))
 debug(`temp recommendations: are just a ${typeof recs}: ${JSON.stringify(recs, null, 2)}`)
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.send('hello world')
+/* GET outing page. */
+router.get('/outings/:magicLinkId', function (req, res, next) {
+  res.render('outing', {
+    outingId: req.params.magicLinkId,
+    message: JSON.stringify(recs, null, 2)
+  })
 })
+
 /* POST form submission. */
-router.post('/my-handling-form-page', upload.array(), function (req, res, next) {
+router.post('/outings', upload.array(), function (req, res, next) {
   debug('request body', req.body)
   debug('typeof request body', typeof req.body)
   const validPhoneList = req.body.phone.filter(function (el, i, arr) {
@@ -79,30 +80,8 @@ router.post('/my-handling-form-page', upload.array(), function (req, res, next) 
   ]
  */
 router.get('/outings/:outing/users/:user/recs', function (req, res, next) {
-  res.json([
-    {
-      id: 1,
-      place: {
-        placeId: 1,
-        name: 'sunrise/sunset',
-        dollarSigns: 2,
-        images: [],
-        description: 'a fun hipster joint for coffee and small bites'
-      }
-    },
-    {
-      id: 2,
-      place: {
-        placeId: 2,
-        name: 'little skips',
-        dollarSigns: 2,
-        images: [],
-        description: 'a fun hipster joint for coffee and small bites'
-      }
-    }
-  ])
+  // in here becuase I'm using couch I need to use a view to find the recs that the user hasn't voted on
 })
-
 /* POST like for a recommendation. */
 router.post('/like/:placeId', function (req, res, next) {
   res.send('sunrise/sunset')

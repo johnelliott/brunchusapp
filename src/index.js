@@ -30,9 +30,9 @@ form.addEventListener('submit', function (evt) {
     console.log('form is valid')
     // TODO call POST function or something
     console.log('event', evt)
-    var formData = new FormData(evt.target)
-    var request = new XMLHttpRequest()
-    request.open('POST', '/api/my-handling-form-page')
+    const formData = new FormData(evt.target)
+    const request = new XMLHttpRequest()
+    request.open('POST', '/outings')
     request.send(formData)
     console.log('form data', formData)
     return false
