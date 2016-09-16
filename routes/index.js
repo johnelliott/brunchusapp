@@ -14,12 +14,13 @@ const validUsPhone = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02
 const recs = JSON.parse(fs.readFileSync(`lib/recommendations.json`))
 debug(`temp recommendations: are just a ${typeof recs}: ${JSON.stringify(recs, null, 2)}`)
 
-/* GET outing page. */
-router.get('/outings/:magicLinkId', function (req, res, next) {
-  res.render('outing', {
-    outingId: req.params.magicLinkId,
-    message: JSON.stringify(recs, null, 2)
-  })
+/* GET outing. */
+router.get('/outings/:magicLinkId/recs', function (req, res, next) {
+  res.json(recs)
+})
+/* GET outing. */
+router.get('/outing', function (req, res, next) {
+  res.render('outing')
 })
 
 /* POST form submission. */
@@ -48,9 +49,7 @@ router.post('/outings', upload.array(), function (req, res, next) {
     sendSms(phone, `Let's go to brunch! http://${smsLinkHost}/outings/${magicLinkId}`)
   }
   outings.insert({ parties, recs })
-
-  // request.post(`http://127.0.0.1:5984/outings/`, {parties: validPhoneList})
-  // res.redirect(`/outings/${linkHashes[0]}`)
+  res.end('ok this is the resoonse of making an outing')
 })
 
 /* GET recommendations for an outing. */
@@ -83,12 +82,12 @@ router.get('/outings/:outing/users/:user/recs', function (req, res, next) {
   // in here becuase I'm using couch I need to use a view to find the recs that the user hasn't voted on
 })
 /* POST like for a recommendation. */
-router.post('/like/:placeId', function (req, res, next) {
+router.post('/outings/like/:placeId', function (req, res, next) {
   res.send('sunrise/sunset')
 })
 
 /* POST pass for a recommendation. */
-router.post('/pass/:placeId', function (req, res, next) {
+router.post('/outings/pass/:placeId', function (req, res, next) {
   res.send('sunrise/sunset')
 })
 

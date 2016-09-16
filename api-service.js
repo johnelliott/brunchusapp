@@ -14,7 +14,7 @@ require('dotenv').config()
 var routes = require('./routes/index')
 
 var app = express()
-app.set(path.join('views', __dirname, '/views')) // general config
+app.set(path.join('views', __dirname, 'views')) // general config
 app.set('view engine', 'pug')
 
 app.use(compression())
@@ -25,8 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser(process.env.COOKIE_SECRET)) // see express-session note
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/api', routes)
-// app.use('/users', users)
+app.use('/', routes)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -33,6 +33,12 @@ form.addEventListener('submit', function (evt) {
     const formData = new FormData(evt.target)
     const request = new XMLHttpRequest()
     request.open('POST', '/outings')
+    request.onreadystatechange = function () {
+      if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+        console.log(request.responseText)
+        window.location.href='/outing'
+      }
+    }
     request.send(formData)
     console.log('form data', formData)
     return false
