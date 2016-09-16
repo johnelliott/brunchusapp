@@ -21,16 +21,20 @@ form.addEventListener('submit', function (evt) {
     for (let field of addPhoneFields) {
       console.log('field: %s is valid? %s', field, field.validity.valid)
       if (field.value.length > 0 && !field.validity.valid) {
-        console.log('invalid field')
         console.log('phone field is valid? ', field.validity.valid)
-        if (!field.validity.valid) {
-          field.classList.add('invalid-form')
-        }
+        field.classList.add('invalid-form')
+        field.setCustomValidity('US phone number')
       }
     }
   } else {
     console.log('form is valid')
     // TODO call POST function or something
+    console.log('event', evt)
+    var formData = new FormData(evt.target)
+    var request = new XMLHttpRequest()
+    request.open('POST', '/api/my-handling-form-page')
+    request.send(formData)
+    console.log('form data', formData)
     return false
   }
 })

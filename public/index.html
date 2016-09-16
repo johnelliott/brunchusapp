@@ -4,49 +4,55 @@
     <meta charset="utf-8"/>
     <title>🍳 brunch.us</title>
     <meta name="theme-color" content="#81E7EB">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#81E7EB">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="Shortcut Icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="brunch.us">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-startup-image" href="images/touch-icon-ipad-retina.png">
     <link rel="stylesheet" href="style.css"/>
+    <link rel="manifest" href="manifest.json">
+    <link rel="Shortcut Icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/touch-icon-iphone.png">
     <link rel="apple-touch-icon" sizes="76x76" href="images/touch-icon-ipad.png">
     <link rel="apple-touch-icon" sizes="120x120" href="images/touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="152x152" href="images/touch-icon-ipad-retina.png">
+    <link rel="icon" sizes="144x144" href="images/icon-144x144.png">
   </head>
 
   <body>
   <div class="navigation">
     <nav>
-      <h1 class="navigation__title"><a href="/" title="home"><span class="huge">🍳</span> brunch.us</a></h1>
-      <ul>
-        <li><a href="mailto:brunchus@primitivemachine.com?subject=">contact</a></li>
-      </ul>
+      <h1><a href="/" title="home"><span class="huge">🍳</span> brunch.us</a></h1>
     </nav>
   </div>
   <div class="content">
-    <!-- Simple form which will send a POST request -->
-    <!-- maxlength="10"
-
-    TODO do visual feedback while fillin in the form on iphones-->
-    <form id="form" class="add-numbers" action="" method="post">
+    <h1>Add your party:</h1>
+    <form id="form" class="add-numbers" action="/api/my-handling-form-page" method="post" method="post" enctype="application/x-www-form-urlencoded">
       <label for="POST-number">Phone</label>
-      <input name="phone" id="POST-number" type="tel" inputmode="tel" required autofocus autocomplete="tel" placeholder="337 867 5309"  pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$" minlength="10" maxlength="17">
-      <input type="submit" value="Let's go!">
+      <input class="phone-fill" autofocus name="phone" id="POST-number" type="tel" inputmode="tel" autocomplete="tel" placeholder="337 867 5309…"  pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$" minlength="10" maxlength="17">
+      <input class="phone-fill" name="phone" id="POST-number" type="tel" inputmode="tel" autocomplete="tel" placeholder="337 867 5309…"  pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$" minlength="10" maxlength="17">
+      <input class="phone-fill" name="phone" id="POST-number" type="tel" inputmode="tel" autocomplete="tel" placeholder="337 867 5309…"  pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$" minlength="10" maxlength="17">
+      <input type="submit" value="Invite">
     </form>
-  </div>
-</body>
+    <footer>
+      <ul>
+        <li><a href="mailto:brunchus@primitivemachine.com?subject=">Contact</a></li>
+      </ul>
+    </footer>
 
+  </div>
   <script src="bundle.js"></script>
-  <!-- <script>
+  <script>
     if ('serviceWorker' in navigator) {
       console.log('registering service worker')
-        navigator.serviceWorker
-        .register('service-worker.js')
-        .then(function(){
-          console.log('service worker registered')
-        })
+      navigator.serviceWorker
+      .register('service-worker.js')
+      .then(function(){
+        console.log('service worker registered')
+      })
     }
-  </script> -->
+  </script>
+</body>
+
 </html>
