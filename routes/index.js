@@ -1,11 +1,21 @@
+// const url = require('url')
+// const path = require('path')
+// const request = require('request')
+const fs = require('fs')
 const crypto = require('crypto')
 const express = require('express')
-const router = express.Router()
 const multer = require('multer')
-const upload = multer()
 const ip = require('ip')
 const debug = require('debug')('brunch.us:api-service:routes')
 const sendSms = require('../lib/send-twilio-sms.js')
+const nano = require('nano')('http://localhost:5984')
+
+const router = express.Router()
+const upload = multer()
+const outings = nano.use('outings')
+const validUsPhone = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$/
+const recs = JSON.parse(fs.readFileSync(`lib/recommendations.json`))
+debug(`temp recommendations: are just a ${typeof recs}: ${JSON.stringify(recs, null, 2)}`)
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -15,26 +25,30 @@ router.get('/', function (req, res, next) {
 router.post('/my-handling-form-page', upload.array(), function (req, res, next) {
   debug('request body', req.body)
   debug('typeof request body', typeof req.body)
-  const validUsPhone = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$/
   const validPhoneList = req.body.phone.filter(function (el, i, arr) {
     return el.match(validUsPhone)
   })
+  if (validPhoneList.length === 0) {
+    throw new Error('no phone numbers were valid')
+  }
   debug('valid phone numbers to send SMSes to:', validPhoneList)
 
-  for (let phone in req.body) {
-    // TODO switch to using UUID or some better random number lib
-    // if (phone === '') {
-    //   return
-    // }
+  const parties = []
+  for (let phone in validPhoneList) {
+    debug(`doing stuff for ${phone}`)
     const magicLinkId = crypto.randomBytes(4).toString('hex')
-    // TODO store this ID somewhere in a session store
-    // For now, send everyone an SMS
+    debug(`made link ${magicLinkId}`)
+    parties.push({phone, magicLinkId})
+
     // TODO this seems fishy
     const smsLinkHost = process.env.ENV === 'development' ? ip.address() : process.process.env.DOMAIN_NAME
-    const postToCouchDbSlug = `/outings/${magicLinkId}`
+    // TODO async send out the SMS messages and redirect the outing initiator
+    // For now, send everyone an SMS
     sendSms(phone, `Let's go to brunch! http://${smsLinkHost}/outings/${magicLinkId}`)
   }
-  // TODO async send out the SMS messages and redirect the outing initiator
+  outings.insert({ parties, recs })
+
+  // request.post(`http://127.0.0.1:5984/outings/`, {parties: validPhoneList})
   // res.redirect(`/outings/${linkHashes[0]}`)
 })
 
