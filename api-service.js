@@ -1,11 +1,11 @@
-var express = require('express')
-var path = require('path')
-var favicon = require('serve-favicon')
-var logger = require('morgan')
-var cookieParser = require('cookie-parser')
-var bodyParser = require('body-parser')
-var compression = require('compression')
 const debug = require('debug')('brunch.us:api-service:index')
+const express = require('express')
+const path = require('path')
+const favicon = require('serve-favicon')
+const logger = require('morgan')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const compression = require('compression')
 
 // TODO PORT, other env, and .env.test like
 // https://www.twilio.com/docs/tutorials/walkthrough/server-notifications/node/express#configure-twilio-client
