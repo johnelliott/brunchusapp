@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "place": {
+      "placeId": 1,
+      "name":"sunrise/sunset",
+      "dollarSigns": 2
+    }
+  },
+  {
+    "id": 2,
+    "place": {
+      "placeId": 2,
+      "name":"little skips",
+      "dollarSigns": 2
+    }
+  }
+]
