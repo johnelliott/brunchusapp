@@ -27,9 +27,7 @@ router.get('/outing', function (req, res, next) {
 router.post('/outings', upload.array(), function (req, res, next) {
   debug('request body', req.body)
   debug('typeof request body', typeof req.body)
-  const validPhoneList = req.body.phone.filter(function (el, i, arr) {
-    return el.match(validUsPhone)
-  })
+  const validPhoneList = req.body.phone.filter(p => p.match(validUsPhone))
   if (validPhoneList.length === 0) {
     throw new Error('no phone numbers were valid')
   }
