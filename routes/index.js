@@ -44,7 +44,7 @@ router.post('/outings', upload.array(), function (req, res, next) {
     const smsLinkHost = process.env.ENV === 'development' ? ip.address() : process.process.env.DOMAIN_NAME
     // TODO async send out the SMS messages and redirect the outing initiator
     // For now, send everyone an SMS
-    sendSms(phone, `Let's go to brunch! http://${smsLinkHost}/outings/${magicLinkId}`)
+    sendSms(phone, `🍳 Let's go to brunch! http://${smsLinkHost}/outings/${magicLinkId}`)
   }
   outings.insert({ parties, recs })
   res.end('ok this is the resoonse of making an outing')
