@@ -1,27 +1,6 @@
-html
-  head
-    <title>🍳 brunch.us</title>
-    <meta name="theme-color" content="#81E7EB">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="brunch.us">
-    <meta name="mobile-web-app-capable" content="yes">
-    //- <link rel="apple-touch-startup-image" href="images/touch-icon-ipad-retina.png">
-    <link rel="stylesheet" href="/style.css"/>
-    //- <link rel="manifest" href="manifest.json">
-    <link rel="Shortcut Icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="images/touch-icon-iphone.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="images/touch-icon-ipad.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="images/touch-icon-iphone-retina.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="images/touch-icon-ipad-retina.png">
-    <link rel="icon" sizes="144x144" href="images/icon-144x144.png">
-  body
-    nav
-      h1
-        a(href='/' title='home')
-          span(class='huge') 🍳
-          span  brunch.us
-    h1 Check SMS!
-    p We sent invitations to your party.
-    ul #{parties}
+extends layout.pug
+
+block content
+  h1 Check SMS!
+  p We sent invitations to your party.
+  ul #{parties}
