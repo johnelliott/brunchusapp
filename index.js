@@ -3,40 +3,41 @@
 This came from wb-web, needs work to function well
 
 */
-var debug = require('debug')('brunchus:index')
-var fs = require('fs')
-var http = require('http')
-var https = require('https') // TODO use spdy, stock https to help out pouchdb for now...
-var url = require('url')
-var ecstatic = require('ecstatic')
-var request = require('request')
+const debug = require('debug')('brunchus:index')
+const fs = require('fs')
+const path = require('path')
+const http = require('http')
+const https = require('https') // TODO use spdy, stock https to help out pouchdb for now...
+const url = require('url')
+const ecstatic = require('ecstatic')
+const request = require('request')
 
-var httpPort = process.env.REDIRECT_PORT || 8081
-var httpsPort = process.env.PORT || 8080
+const httpPort = process.env.REDIRECT_PORT || 8081
+const httpsPort = process.env.PORT || 8080
 
 // CERTPATH handy to override in development
-var certPath = process.env.CERTPATH || __dirname + '/certs'
+const certPath = process.env.CERTPATH || path.join(__dirname, '/certs')
 
 // HTTPS setup
-var serverOptions = {
+const serverOptions = {
   cert: fs.readFileSync(certPath + '/self.crt'),
   ca: process.NODE_ENV === 'production' ? fs.readFileSync(certPath + '/chain.pem') : undefined,
   key: fs.readFileSync(certPath + '/self.key')
 }
 
 // Middlewares
-var staticMiddleware = ecstatic({
+const staticMiddleware = ecstatic({
   root: __dirname + '/public',
   gzip: process.env.NODE_ENV === 'production' // ecstatic will serve gz versions, otherwise fall back
 })
 
 // Server
-var server = https.createServer(serverOptions, function requestHandler (req, res) {
+const server = https.createServer(serverOptions, function requestHandler (req, res) {
   if (req.url.match(/\/api/)) {
-    var urlParts = url.parse(req.url)
+    const urlParts = url.parse(req.url)
     // TODO remove hacky slice
-    var apiBase = '/api'
-    var urlResolved = url.resolve(apiBase, 'http://127.0.0.1:5984/data' + urlParts.path.slice(apiBase.length))
+    const apiBase = '/api'
+    const urlResolved = url.resolve(apiBase, 'http://127.0.0.1:5984/data' + urlParts.path.slice(apiBase.length))
     req.pipe(request(urlResolved)).pipe(res)
   } else {
     staticMiddleware(req, res)
@@ -44,7 +45,7 @@ var server = https.createServer(serverOptions, function requestHandler (req, res
 })
 
 // Redirect http to https
-var redirectServer = http.createServer(function (req, res) {
+const redirectServer = http.createServer(function (req, res) {
   const redirectUrl = `https://${req.headers.host.split(':')[0]}:${httpsPort}${req.url}`
   res.writeHead(301, { 'Location': redirectUrl })
   res.end()
