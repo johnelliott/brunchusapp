@@ -43,11 +43,14 @@
     "morgan": "^1.7.0",
     "multer": "^1.2.0",
     "node-sass": "^3.8.0",
+    "node-uuid": "^1.4.7",
     "pug": "^2.0.0-beta6",
     "request": "^2.74.0",
     "serve-favicon": "^2.3.0",
+    "swipe-cards": "^1.0.0",
+    "twilio": "^2.9.3",
     "uglify-js": "^2.6.4",
-    "twilio": "^2.9.3"
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0",
