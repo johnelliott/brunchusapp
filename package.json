@@ -4,22 +4,21 @@
   "description": "web interface for brunch.us",
   "main": "index.js",
   "scripts": {
-    "two-fake-counters": "echo 88 89 |xargs -P 2 -n 1 ./faker.sh",
-    "dbg-client": "DEBUG=wb* node_modules/nodemon/bin/nodemon.js index.js --ignore src/ --ignore public/*.js",
-    "watch-client": "node_modules/watchify/bin/cmd.js --debug src/index.js --outfile public/bundle.js -t babelify",
-    "sass-watch": "node_modules/node-sass/bin/node-sass --watch src/style.scss public/style.css",
-    "build-css": "node_modules/node-sass/bin/node-sass src/style.scss public/style.css",
-    "build-min-css": "npm run build-css && node_modules/clean-css/bin/cleancss public/style.css -o public/style.css",
-    "dbg-ui": "node_modules/budo/bin/cmd.js src/index.js --serve bundle.js --live --dir public/ -- -t babelify --outfile public/bundle.js",
     "build": "npm run build-production",
     "build-client": "browserify src/index.js --outfile public/bundle.js -t babelify",
     "build-client-uglified": "browserify src/index.js -t babelify | ./node_modules/uglify-js/bin/uglifyjs > public/bundle.js",
+    "build-css": "node_modules/node-sass/bin/node-sass src/style.scss public/style.css",
+    "build-min-css": "npm run build-css && node_modules/clean-css/bin/cleancss public/style.css -o public/style.css",
     "build-production": "npm run build-min-css && npm run build-client-uglified && npm run compress-assets",
-    "compress-assets": "gzip -kf public/*.js && gzip -kf public/*.css && gzip -kf public/*/*.jpg && gzip -kf public/*/*/*.svg && gzip -kf public/*/*/*.ttf",
-    "test": "echo NO TESTS!",
-    "start-waybot-server": "node index.js",
+    "compress-assets": "gzip -kf public/*.js && gzip -kf public/*.css",
+    "dbg-api": "DEBUG=* ENV=development node_modules/nodemon/bin/nodemon.js --ignore src/*.js bin/www",
+    "dbg-ui": "node_modules/budo/bin/cmd.js src/index.js --serve bundle.js --live --dir public/ -- -t babelify --outfile public/bundle.js",
+    "dbg-waybot-client": "DEBUG=wb* node_modules/nodemon/bin/nodemon.js index.js --ignore src/ --ignore public/*.js",
     "start-api": "node ./bin/www",
-    "dbg-api": "DEBUG=* ENV=development node_modules/nodemon/bin/nodemon.js --ignore src/*.js bin/www"
+    "start-waybot-server": "node index.js",
+    "test": "echo NO TESTS!",
+    "watch-client": "node_modules/watchify/bin/cmd.js --debug src/index.js --outfile public/bundle.js -t babelify",
+    "watch-css": "node_modules/node-sass/bin/node-sass --watch src/style.scss public/style.css"
   },
   "keywords": [
     "node",
@@ -47,6 +46,7 @@
     "pug": "^2.0.0-beta6",
     "request": "^2.74.0",
     "serve-favicon": "^2.3.0",
+    "uglify-js": "^2.6.4",
     "twilio": "^2.9.3"
   },
   "devDependencies": {
@@ -55,7 +55,6 @@
     "nodemon": "^1.10.2",
     "standard": "^8.0.0",
     "tape": "^4.4.0",
-    "uglify-js": "^2.6.4",
     "watchify": "^3.7.0"
   }
 }
