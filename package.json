@@ -45,7 +45,7 @@
     "node-sass": "^3.8.0",
     "node-uuid": "^1.4.7",
     "pug": "^2.0.0-beta6",
-    "request": "^2.74.0",
+    "request": "^2.75.0",
     "serve-favicon": "^2.3.0",
     "swipe-cards": "^1.0.0",
     "twilio": "^2.9.3",

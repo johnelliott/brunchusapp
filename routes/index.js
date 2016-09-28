@@ -34,7 +34,7 @@ router.get('/outing', function (req, res, next) {
 
 // router.get('/outings/:magicLinkId/recs', function (req, res, next) {
 //   debug(`temp recommendations: are just a ${typeof recs}: ${JSON.stringify(recs, null, 2)}`)
-  res.render('outing', {parties: ['yolo', 'trolo']})
+  // res.render('outing', {parties: ['yolo', 'trolo']})
 // })
 
 /* POST like for a recommendation. */

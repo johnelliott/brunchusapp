@@ -27,7 +27,7 @@ const serverOptions = {
 
 // Middlewares
 const staticMiddleware = ecstatic({
-  root: __dirname + '/public',
+  root: path.join(__dirname, '/public'),
   gzip: process.env.NODE_ENV === 'production' // ecstatic will serve gz versions, otherwise fall back
 })
 

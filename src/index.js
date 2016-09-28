@@ -36,7 +36,7 @@ form.addEventListener('submit', function (evt) {
     request.onreadystatechange = function () {
       if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
         console.log(request.responseText)
-        window.location.href='/outing'
+        window.location.href = '/outing'
       }
     }
     request.send(formData)
@@ -44,3 +44,6 @@ form.addEventListener('submit', function (evt) {
     return false
   }
 })
+
+import { AnimationStack } from 'swipe-cards'
+console.log(`AnimationStack: %${AnimationStack}`)

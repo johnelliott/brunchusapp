@@ -1,5 +1,10 @@
 node_modules
 .npmrc
 .nvmrc
+.env
 .editorconfig
 public/**/*.gz
+*.mov
+*.txt
+scratch
+certs/*

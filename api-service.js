@@ -25,6 +25,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser(process.env.COOKIE_SECRET)) // see express-session note
 app.use(express.static(path.join(__dirname, 'public')))
 
+// TODO stick session middleware in here
+// TODO stick auth middleware in here?
+
 app.use('/', routes)
 
 // catch 404 and forward to error handler

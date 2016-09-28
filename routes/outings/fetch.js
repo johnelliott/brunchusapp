@@ -5,7 +5,7 @@
 
 const debug = require('debug')('brunch.us:api-service:routes:outings:fetch')
 // const ip = require('ip')
-const nano = require('nano')(`http://127.0.0.1:${process.env.COUCH_PORT || 5984}`)
+const nano = require('nano')(`http://127.0.0.1:${process.env.COUCH_PORT}`)
 
 const outings = nano.use('outings')
 
@@ -13,7 +13,9 @@ const outings = nano.use('outings')
 module.exports = function fetchOuting (req, res, next) {
   debug('request body', req.body)
   const outingId = req.params.outing
-  outings.get(outingId, function (err, body) {
+  // TODO check request type and serce as page or JSON
+
+  const outingRequest = outings.get(outingId, function (err, body) {
     if (err) {
       debug.error(err)
       next(err)
@@ -22,5 +24,5 @@ module.exports = function fetchOuting (req, res, next) {
     // debug(`temp recommendations: are just a ${typeof recs}: ${JSON.stringify(recs, null, 2)}`)
     // res.status(200)
     // res.end(body)
-  }).pipe(res)
+  })
 }
