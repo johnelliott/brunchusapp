@@ -8,16 +8,16 @@ const fetchOuting = require('./outings/fetch')
 const router = express.Router()
 const upload = multer()
 
-// proxy to couchdb if the request warrants it
-router.use(function couchDBDirectMiddleware (req, res, next) {
-  // if (req.acceptsEncodings('application/json'))
-  if (req.accepts('application/json')) {
-    debug(`this is totaly proxyable to couchdb accepts: ${req.accepts('application/json')} is: ${req.is('application/json')}`)
-    req.pipe(request(`http://127.0.0.1:${process.env.COUCH_PORT}${req.path}`)).pipe(res)
-  } else {
-    next()
-  }
-})
+// // proxy to couchdb if the request warrants it
+// router.use(function couchDBDirectMiddleware (req, res, next) {
+//   // if (req.acceptsEncodings('application/json'))
+//   if (req.accepts('application/json')) {
+//     debug(`this is totaly proxyable to couchdb accepts: ${req.accepts('application/json')} is: ${req.is('application/json')}`)
+//     req.pipe(request(`http://127.0.0.1:${process.env.COUCH_PORT}${req.path}`)).pipe(res)
+//   } else {
+//     next()
+//   }
+// })
 
 /* POST form submission. */
 /* takes multipart form data */
