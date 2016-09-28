@@ -1,11 +1,11 @@
 'use strict'
 
-const join = require('path').join
+const path = require('path')
 
 module.exports = {
-  entry: join(__dirname, 'client/index.js'),
+  entry: path.join(__dirname, 'client/index.js'),
   output: {
-    filename: join(__dirname, 'public/bundle.js')
+    filename: path.join(__dirname, 'public/bundle.js')
   },
   devtool: 'source-map',
   module: {
