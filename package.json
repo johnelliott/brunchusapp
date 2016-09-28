@@ -18,6 +18,7 @@
     "start-waybot-server": "node index.js",
     "test": "echo NO TESTS!",
     "watch-client": "node_modules/watchify/bin/cmd.js --debug client/index.js --outfile public/bundle.js -t babelify",
+    "dbg-webpack": "node_modules/webpack/bin/webpack.js --config webpack.dev.config.js",
     "webpack": "node_modules/webpack/bin/webpack.js",
     "watch-css": "node_modules/node-sass/bin/node-sass --watch client/style.scss public/style.css"
   },
