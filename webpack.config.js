@@ -5,7 +5,7 @@ const join = require('path').join
 module.exports = {
   entry: join(__dirname, 'client/index.js'),
   output: {
-    filename: join(__dirname, 'public/index.js')
+    filename: join(__dirname, 'public/bundle.js')
   },
   devtool: 'source-map',
   module: {
