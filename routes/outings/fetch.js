@@ -3,7 +3,7 @@
 // const crypto = require('crypto')
 // const uuid = require('node-uuid')
 
-const debug = require('debug')('brunch.us:api-service:routes:outings:fetch')
+const debug = require('debug')('brunch.us:server:routes:outings:fetch')
 // const ip = require('ip')
 const nano = require('nano')(`http://127.0.0.1:${process.env.COUCH_PORT}`)
 

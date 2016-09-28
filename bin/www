@@ -4,9 +4,9 @@
  * Module dependencies.
  */
 
-var app = require('../api-service')
+var app = require('../server')
 
-var debug = require('debug')('brunch.us:api-service')
+var debug = require('debug')('brunch.us:server')
 var http = require('http')
 
 /**

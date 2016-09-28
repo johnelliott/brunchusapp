@@ -1,4 +1,4 @@
-const debug = require('debug')('brunch.us:api-service:routes')
+const debug = require('debug')('brunch.us:server:routes')
 const express = require('express')
 const multer = require('multer')
 const request = require('request')

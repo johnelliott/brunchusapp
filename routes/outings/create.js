@@ -3,7 +3,7 @@ const path = require('path')
 const crypto = require('crypto')
 const uuid = require('node-uuid')
 
-const debug = require('debug')('brunch.us:api-service:routes:outings:create')
+const debug = require('debug')('brunch.us:server:routes:outings:create')
 const ip = require('ip')
 const nano = require('nano')(`http://127.0.0.1:${process.env.COUCH_PORT || 5984}`)
 const sendSms = require(path.join(__dirname, '..', '..', 'lib/send-twilio-sms.js'))

@@ -1,4 +1,4 @@
-const debug = require('debug')('brunch.us:api-service:index')
+const debug = require('debug')('brunch.us:server:index')
 const express = require('express')
 const path = require('path')
 const favicon = require('serve-favicon')
