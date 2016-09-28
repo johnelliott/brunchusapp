@@ -18,6 +18,7 @@
     "start-waybot-server": "node index.js",
     "test": "echo NO TESTS!",
     "watch-client": "node_modules/watchify/bin/cmd.js --debug src/index.js --outfile public/bundle.js -t babelify",
+    "webpack": "node_modules/webpack/bin/webpack.js",
     "watch-css": "node_modules/node-sass/bin/node-sass --watch src/style.scss public/style.css"
   },
   "keywords": [
@@ -58,6 +59,7 @@
     "nodemon": "^1.10.2",
     "standard": "^8.0.0",
     "tape": "^4.4.0",
-    "watchify": "^3.7.0"
+    "watchify": "^3.7.0",
+    "webpack": "^1.13.2"
   }
 }
