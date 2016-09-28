@@ -12,6 +12,7 @@
     "build-production": "npm run build-min-css && npm run build-client-uglified && npm run compress-assets",
     "compress-assets": "gzip -kf public/*.js && gzip -kf public/*.css",
     "dbg-api": "DEBUG=* ENV=development node_modules/nodemon/bin/nodemon.js --ignore client/*.js bin/www",
+    "inspect-api": "DEBUG=* ENV=development node_modules/nodemon/bin/nodemon.js --inspect --ignore client/*.js bin/www",
     "dbg-ui": "node_modules/budo/bin/cmd.js client/index.js --serve bundle.js --live --dir public/ -- -t babelify --outfile public/bundle.js",
     "dbg-waybot-client": "DEBUG=wb* node_modules/nodemon/bin/nodemon.js index.js --ignore client/ --ignore public/*.js",
     "start-api": "node ./bin/www",
