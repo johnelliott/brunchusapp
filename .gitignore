@@ -7,4 +7,4 @@ public/**/*.gz
 *.mov
 *.txt
 scratch
-certs/*
+*/certs/*
