@@ -45,5 +45,5 @@ form.addEventListener('submit', function (evt) {
   }
 })
 
-import { AnimationStack } from 'swipe-cards'
-console.log(`AnimationStack: %${AnimationStack}`)
+// import { AnimationStack } from 'swipe-cards'
+// console.log(`AnimationStack: %${AnimationStack}`)

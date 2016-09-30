@@ -11,17 +11,17 @@
     "build-min-css": "npm run build-css && node_modules/clean-css/bin/cleancss public/style.css -o public/style.css",
     "build-production": "npm run build-min-css && npm run build-client-uglified && npm run compress-assets",
     "compress-assets": "gzip -kf public/*.js && gzip -kf public/*.css",
-    "dbg-api": "DEBUG=* ENV=development node_modules/nodemon/bin/nodemon.js --ignore client/*.js bin/www",
-    "inspect-api": "DEBUG=* ENV=development node_modules/nodemon/bin/nodemon.js --inspect --ignore client/*.js bin/www",
+    "dbg-api": "DEBUG=* ENV=development node_modules/nodemon/bin/nodemon.js bin/www",
     "dbg-ui": "node_modules/budo/bin/cmd.js client/index.js --serve bundle.js --live --dir public/ -- -t babelify --outfile public/bundle.js",
-    "dbg-waybot-client": "DEBUG=wb* node_modules/nodemon/bin/nodemon.js index.js --ignore client/ --ignore public/*.js",
+    "dev-webpack": "node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.live.config.js --open",
     "start-api": "node ./bin/www",
-    "start-waybot-server": "node index.js",
+    "inspect-api": "DEBUG=* ENV=development node_modules/nodemon/bin/nodemon.js --inspect bin/www",
     "test": "echo NO TESTS!",
     "watch-client": "node_modules/watchify/bin/cmd.js --debug client/index.js --outfile public/bundle.js -t babelify",
-    "dbg-webpack": "node_modules/webpack/bin/webpack.js --config webpack.dev.config.js",
-    "webpack": "node_modules/webpack/bin/webpack.js",
-    "watch-css": "node_modules/node-sass/bin/node-sass --watch client/style.scss public/style.css"
+    "watch-client-webpack": "node_modules/webpack/bin/webpack.js --watch --config webpack.dev.config.js",
+    "build-client-webpack": "node_modules/webpack/bin/webpack.js -p --config webpack.dev.config.js",
+    "watch-css": "node_modules/node-sass/bin/node-sass --watch client/style.scss public/style.css",
+    "webpack": "node_modules/webpack/bin/webpack.js"
   },
   "keywords": [
     "node",
@@ -50,20 +50,24 @@
     "node-sass": "^3.8.0",
     "node-uuid": "^1.4.7",
     "pug": "^2.0.0-beta6",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "redux": "^3.6.0",
     "request": "^2.75.0",
     "serve-favicon": "^2.3.0",
     "swipe-cards": "^1.0.0",
     "twilio": "^2.9.3",
     "uglify-js": "^2.6.4",
+    "webpack": "^1.13.2",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0",
     "budo": "^8.3.0",
     "nodemon": "^1.10.2",
+    "react-hot-loader": "^3.0.0-beta.5",
     "standard": "^8.0.0",
     "tape": "^4.4.0",
-    "watchify": "^3.7.0",
-    "webpack": "^1.13.2"
+    "watchify": "^3.7.0"
   }
 }
