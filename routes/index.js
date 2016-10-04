@@ -29,7 +29,7 @@ router.get('/outings/:outing', fetchOuting)
 /* GET outing page. */
 /* GET outing. */
 router.get('/outing', function (req, res, next) {
-  res.render('outing', {parties: ['yolo', 'wegotyou']})
+  res.render('outing')
 })
 
 // router.get('/outings/:magicLinkId/recs', function (req, res, next) {
