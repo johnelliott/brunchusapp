@@ -10,9 +10,9 @@ const sendSms = require(path.join(__dirname, '..', '..', 'lib/send-twilio-sms.js
 
 const outings = nano.use('outings')
 
+// Data we'll need to respond
 const smsLinkHost = `${process.env.ENV === 'development' ? ip.address() : process.process.env.DOMAIN_NAME}:${process.env.PORT || 3000}`
 const validUsPhone = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$/
-
 const recs = JSON.parse(fs.readFileSync(`lib/recommendations.json`))
 
 module.exports = function createOuting (req, res, next) {
@@ -24,17 +24,28 @@ module.exports = function createOuting (req, res, next) {
   }
   debug('valid phone numbers to send SMSes to:', validPhoneList)
 
-  const outingId = uuid.v4()
-  const parties = []
-  for (let phone in validPhoneList) {
-    debug(`doing stuff for ${phone}`)
-    debug(`made link ${outingId}`)
-    parties.push({phone, magicLinkId: outingId}) // no way to tell who's who for now
+  // form the outing created by the request
+  const outing = {
+    outingId: uuid.v4(),
+    createdAt: new Date().toISOString(),
+    parties: [],
+    recs
+  }
+
+  // Create magic links and send messages to the parties involved
+  for (let i in validPhoneList) {
+    const phoneNumber = validPhoneList[i]
+    debug(`doing stuff for ${phoneNumber}`)
+    // TODO get non-colliding thing here
+    const magicLinkId = crypto.randomBytes(4).toString('hex')
+    debug(`made link ${magicLinkId}`)
+    outing.parties.push({phoneNumber, magicLinkId}) // no way to tell who's who for now
     // TODO async send out the SMS messages and redirect the outing initiator
     // For now, send everyone an SMS
-    sendSms(phone, `🍳 Let's go to brunch! http://${smsLinkHost}/outings/${outingId}`)
+    sendSms(phoneNumber, `🍳 Let's go to brunch! http://${smsLinkHost}/outings/${outing.outingId}`)
   }
-  outings.insert({ parties, recs, createdAt: new Date().toISOString() }, outingId, function (err, body) {
+
+  outings.insert(outing, outing.outingId, function (err, body) {
     if (err) {
       debug.error(err)
       next(err)
