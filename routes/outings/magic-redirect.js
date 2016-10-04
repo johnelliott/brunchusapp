@@ -9,7 +9,7 @@ const nano = require('nano')(`http://127.0.0.1:${process.env.COUCH_PORT}`)
 
 const outings = nano.use('outings')
 
-// responds with JSON
+// gets the outing from a magic link and redirects
 module.exports = function fetchOuting (req, res, next) {
   debug('request body', req.body)
   const magicLinkId = req.params.outing
@@ -24,9 +24,9 @@ module.exports = function fetchOuting (req, res, next) {
     }
     debug('COUCHDB fetched a body', body)
     // debug(`temp recommendations: are just a ${typeof borecs}: ${JSON.stringify(recs, null, 2)}`)
-    res.status(200)
-    res.render('outing', {
-      data: JSON.stringify(body.rows[0].value.createdAt, null, 2)
-    })
+    // data: JSON.stringify(body.rows[0].value.createdAt, null, 2)
+    // res.status(302)
+    debug(`redirecting to /outings/${body.rows[0]}`)
+    res.redirect(`/outings/${body.rows[0].id}`)
   })
 }
