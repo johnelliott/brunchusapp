@@ -4,19 +4,14 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
-  entry: path.join(__dirname, 'client/index.js'),
-  output: {
-    filename: path.join(__dirname, 'public/bundle.js')
+  entry: {
+    // http://webpack.github.io/docs/multiple-entry-points.html
+    form: path.join(__dirname, 'client/index.js'),
+    app: path.join(__dirname, 'client/cards.js')
   },
-  devServer: {
-    proxy: {
-      '*': {
-        target: 'http://localhost:3000',
-        secure: false
-      }
-    },
-    contentBase: 'public',
-    inline: true
+  output: {
+    path: path.join(__dirname, 'public'),
+    filename: '[name].js'
   },
   plugins: [new webpack.HotModuleReplacementPlugin()], // perhaps this is best to do on CLI with --hot
   devtool: 'source-map',

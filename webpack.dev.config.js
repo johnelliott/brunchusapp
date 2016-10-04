@@ -3,9 +3,14 @@
 const path = require('path')
 
 module.exports = {
-  entry: path.join(__dirname, 'client/index.js'),
+  entry: {
+    // http://webpack.github.io/docs/multiple-entry-points.html
+    form: path.join(__dirname, 'client/index.js'),
+    app: path.join(__dirname, 'client/cards.js')
+  },
   output: {
-    filename: path.join(__dirname, 'public/bundle.js')
+    path: path.join(__dirname, 'public'),
+    filename: '[name].js'
   },
   devtool: 'source-map',
   module: {
