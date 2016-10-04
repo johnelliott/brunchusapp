@@ -24,7 +24,7 @@ const upload = multer()
 router.post('/outings', upload.array(), createOuting)
 
 /* GET an outing as JSON data. */
-router.get('/outings/:outing', fetchOuting)
+router.get('/go/:outing', fetchOuting)
 
 /* GET outing page. */
 /* GET outing. */

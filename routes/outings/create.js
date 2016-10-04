@@ -42,7 +42,7 @@ module.exports = function createOuting (req, res, next) {
     outing.parties.push({phoneNumber, magicLinkId}) // no way to tell who's who for now
     // TODO async send out the SMS messages and redirect the outing initiator
     // For now, send everyone an SMS
-    sendSms(phoneNumber, `🍳 Let's go to brunch! http://${smsLinkHost}/outings/${magicLinkId}`)
+    sendSms(phoneNumber, `🍳 Let's go to brunch! http://${smsLinkHost}/go/${magicLinkId}`)
   }
 
   outings.insert(outing, outing.outingId, function (err, body) {
