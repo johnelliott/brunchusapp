@@ -1,4 +1,3 @@
-console.log('script running')
 const form = document.getElementById('form') // make this by ID
 const addPhoneFieldsNodeList = document.getElementsByClassName('phone-fill')
 const addPhoneFields = Array.prototype.slice.call(addPhoneFieldsNodeList)
@@ -44,6 +43,3 @@ form.addEventListener('submit', function (evt) {
     return false
   }
 })
-
-// import { AnimationStack } from 'swipe-cards'
-// console.log(`AnimationStack: %${AnimationStack}`)
