@@ -3,6 +3,7 @@ const express = require('express')
 const multer = require('multer')
 
 const createOuting = require('./outings/create')
+const viewOuting = require('./outings/view')
 const magicRedirect = require('./outings/magic-redirect')
 
 const router = express.Router()
@@ -15,6 +16,10 @@ router.post('/outings', upload.array(), createOuting)
 router.get('/go/:magicLink', magicRedirect)
 
 /* GET outing, For when we just sent and SMS to the initiating user */
+// TODO rename all this stuff checkSMS
 router.get('/outing', function (req, res, next) { res.render('outing') })
+
+/* GET an outing by id, For when we just sent and SMS to the initiating user */
+router.get('/outings/:outing', viewOuting)
 
 module.exports = router
