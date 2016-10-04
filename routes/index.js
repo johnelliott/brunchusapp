@@ -12,7 +12,7 @@ const upload = multer()
 router.post('/outings', upload.array(), createOuting)
 
 /* GET a magic link */
-router.get('/go/:outing', magicRedirect)
+router.get('/go/:magicLink', magicRedirect)
 
 /* GET outing, For when we just sent and SMS to the initiating user */
 router.get('/outing', function (req, res, next) { res.render('outing') })

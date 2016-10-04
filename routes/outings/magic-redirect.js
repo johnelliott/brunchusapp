@@ -12,7 +12,7 @@ const outings = nano.use('outings')
 // gets the outing from a magic link and redirects
 module.exports = function fetchOuting (req, res, next) {
   debug('request body', req.body)
-  const magicLinkId = req.params.outing
+  const magicLinkId = req.params.magicLink
   console.log(`magicLinkId ${magicLinkId}`)
   // TODO check request type and serce as page or JSON
 
