@@ -3,6 +3,7 @@ $theme-dark-grey: #222327;
 $theme-dark-grey-clear:rgba(78, 81, 89, 0.7);
 $theme-active-link-color: #472F9C;
 $theme-problem-red: #FF2F4E;
+$theme-color-yolk: rgb(247, 229, 95);
 
 html {
   min-height: 100%; //fill linear gradient
@@ -114,6 +115,10 @@ div.content {
       text-transform: uppercase;
       &:focus {
         border-bottom: 0.15em solid $theme-dark-grey;
+      }
+      &:active {
+       background-color: $theme-color-yolk;
+       //color: white;
       }
     }
   }
