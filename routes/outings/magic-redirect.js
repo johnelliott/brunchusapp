@@ -28,5 +28,10 @@ module.exports = function fetchOuting (req, res, next) {
     // res.status(302)
     debug(`redirecting to /outings/${body.rows[0]}`)
     res.redirect(`/outings/${body.rows[0].id}`)
+
+    // set session phone number
+    debug(`setting session phone number ${body.rows[0].value.phoneNumber}`)
+    req.session.phoneNumber = body.rows[0].value.phoneNumber
+    // TODO will have to match (703) 606-6494 and 7036066494 in the future...
   })
 }

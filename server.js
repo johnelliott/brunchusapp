@@ -6,6 +6,7 @@ const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const compression = require('compression')
+const session = require('express-session')
 
 // TODO PORT, other env, and .env.test like
 // https://www.twilio.com/docs/tutorials/walkthrough/server-notifications/node/express#configure-twilio-client
@@ -17,15 +18,27 @@ var app = express()
 app.set(path.join('views', __dirname, 'views')) // general config
 app.set('view engine', 'pug')
 
+// TODO use redis for this and not memory session store
+// INFO httponly Note be careful when setting this to true, as compliant clients
+// will not allow client-side JavaScript to see the cookie in document.cookie.
+// INFO see https://github.com/expressjs/session#secure
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1) // trust first proxy
+}
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: app.get('env') === 'production' } // see https://github.com/expressjs/session#secure
+}))
+app.use(cookieParser(process.env.COOKIE_SECRET)) // see express-session note
 app.use(compression())
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')))
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cookieParser(process.env.COOKIE_SECRET)) // see express-session note
 app.use(express.static(path.join(__dirname, 'public')))
 
-// TODO stick session middleware in here
 // TODO stick auth middleware in here?
 
 app.use('/', routes)
