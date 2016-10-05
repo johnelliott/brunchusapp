@@ -1,6 +1,29 @@
 extends layout.pug
 
+block styles
+  link(rel="stylesheet" href="/cards.css" type='text/css')
 block content
-  h1 Choose a place
+  <div class="container">
+    <div class="card-container">
+      <div class="card">Das Surma</div>
+      <div class="card">Aerofsdtwist</div>
+      <div class="card">Jackfsd Archibungle</div>
+      <div class="card">Das 222fsdSurma</div>
+      <div class="card">Aero222fsdtwist</div>
+      <div class="card">Jac@@k222fsd Archibungle</div>
+      <div class="card">Das@@ 222fsdSurma</div>
+      <div class="card">Aer@@o222fsdtwist</div>
+      <div class="card">Jac@@k222fsd Archibungle</div>
+      <div class="card">Das@@ Surma</div>
+      <div class="card">Aerotwist</div>
+      <div class="card">Jack Archibungle</div>
+      <div class="card">Drag me</div>
+    </div>
+    <div class='buttons'>
+      <button class="buttons__pass">✖︎ Pass</button>
+      <button class="buttons__like">✔ Like</button>
+    </div>
+  </div>
+
   p #{JSON.stringify(data, null, 2)}
-  script(src='app.js')
+  script(src='/app.js')
