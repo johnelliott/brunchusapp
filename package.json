@@ -22,6 +22,14 @@
     "wp-watch-client": "node_modules/webpack/bin/webpack.js --watch --config webpack.dev.config.js",
     "~test": "echo NO TESTS!"
   },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ],
+    "presets": [
+      "es2015"
+    ]
+  },
   "keywords": [
     "node",
     "brunch"
