@@ -7,14 +7,14 @@ const outings = nano.use('outings')
 // gets the outing from a magic link and redirects
 module.exports = function fetchOuting (req, res, next) {
   debug('request body', req.body)
+  debug('what is session!>!>>!>!>', req.session)
   const outingId = req.params.outing
-  console.log(`outingId ${outingId}`)
   // TODO check request type and serce as page or JSON
 
   // /outings/_design/findOuting/_view/byMagicLink
   outings.get(outingId, function (err, body) {
     if (err) {
-      debug.error(err)
+      debug('Error: ' + err)
       next(err)
     }
     debug('COUCHDB fetched a body', body)

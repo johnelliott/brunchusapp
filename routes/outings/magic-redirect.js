@@ -22,16 +22,13 @@ module.exports = function fetchOuting (req, res, next) {
       debug.error(err)
       next(err)
     }
+    req.session.user = { phone: body.rows[0].value.phoneNumber }
     debug('COUCHDB fetched a body', body)
     // debug(`temp recommendations: are just a ${typeof borecs}: ${JSON.stringify(recs, null, 2)}`)
     // data: JSON.stringify(body.rows[0].value.createdAt, null, 2)
     // res.status(302)
     debug(`redirecting to /outings/${body.rows[0]}`)
-    res.redirect(`/outings/${body.rows[0].id}`)
-
-    // set session phone number
-    debug(`setting session phone number ${body.rows[0].value.phoneNumber}`)
-    req.session.phoneNumber = body.rows[0].value.phoneNumber
     // TODO will have to match (703) 606-6494 and 7036066494 in the future...
+    res.redirect(`/outings/${body.rows[0].id}`)
   })
 }
