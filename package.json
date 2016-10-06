@@ -8,7 +8,9 @@
     "api-dev": "ENV=development node_modules/nodemon/bin/nodemon.js bin/www",
     "api-inspect": "DEBUG=* ENV=development node_modules/nodemon/bin/nodemon.js --inspect bin/www",
     "start": "node ./bin/www",
-    "build-client": "node_modules/webpack/bin/webpack.js -p --config webpack.config.js",
+    "build-client": "node_modules/webpack/bin/webpack.js -p --config webpack.config.js && npm run build-sw",
+    "build-sw": "node_modules/sw-precache/cli.js --root=tmp --static-file-globs='public/**/*.{js,css,html,png,ico}' && cp tmp/service-worker.js public/",
+    "build-sw-production": "node_modules/sw-precache/cli.js --root=tmp --static-file-globs='public/**/*.{js,css,html,png,ico}' && cat tmp/service-worker.js | ./node_modules/uglify-js/bin/uglifyjs > public/service-worker.js",
     "build-client-dev": "node_modules/webpack/bin/webpack.js --config webpack.dev.config.js",
     "watch-client": "node_modules/webpack/bin/webpack.js --watch --config webpack.dev.config.js",
     "live-client": "node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.live.config.js --open",
@@ -57,6 +59,7 @@
     "sass-loader": "^4.0.2",
     "standard": "^8.0.0",
     "style-loader": "^0.13.1",
+    "sw-precache": "^4.1.0",
     "tape": "^4.4.0"
   }
 }
