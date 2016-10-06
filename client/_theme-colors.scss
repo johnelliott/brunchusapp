@@ -1,6 +1,9 @@
 $theme-color: #81E7EB;
+$theme-color-yolk: rgb(247, 229, 95);
+$theme-color-yolk-clear: rgba(247, 229, 95, 0.4);
 $theme-dark-grey: #222327;
 $theme-dark-grey-clear:rgba(78, 81, 89, 0.7);
+
+$theme-tap-highlight-color: $theme-color-yolk-clear;
 $theme-active-link-color: #472F9C;
 $theme-problem-red: #FF2F4E;
-$theme-color-yolk: rgb(247, 229, 95);
