@@ -60,6 +60,7 @@
     "standard": "^8.0.0",
     "style-loader": "^0.13.1",
     "sw-precache": "^4.1.0",
-    "tape": "^4.4.0"
+    "tape": "^4.4.0",
+    "webpack-dev-server": "^1.16.1"
   }
 }
