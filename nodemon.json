@@ -1,0 +1,9 @@
+{
+  "verbose": true,
+  "ignore": [
+    "*.test.js",
+    "public/*.js*",
+    "client/*.js",
+    "webpack*.js"
+  ]
+}
