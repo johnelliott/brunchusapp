@@ -1,8 +1,11 @@
 'use strict'
-const webpack = require('webpack')
 
+require('dotenv').config()
 const path = require('path')
+const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+const CURRENT_IP = require('ip').address()
 
 module.exports = {
   entry: {
@@ -20,20 +23,25 @@ module.exports = {
     hot: true,
     inline: true,
     // https: true,
-    // port: 8081,
-    contentBase: path.resolve(__dirname,'public'),
+    host: CURRENT_IP,
+    port: process.env.HOT_PORT || 8000,
+    contentBase: path.resolve(__dirname, 'public'),
     proxy: {
+      // https://github.com/nodejitsu/node-http-proxy#options
       '!/**/*.{css,js,hot-update.json}': {
         target: 'http://localhost:3000',
         secure: false
-        // changeOrigin: true
+        // changeOrigin: false,
+        // hostRewrite: true,
+        // autoRewrite: true,
+        // localAddress: CURRENT_IP
       }
     }
   },
   devtool: 'source-map',
   // Use the plugin to create page-specific css files built by require in via javascript and link tags in .html and .pug views
   plugins: [
-    new ExtractTextPlugin("[name].css"),
+    new ExtractTextPlugin('[name].css'),
     new webpack.HotModuleReplacementPlugin() // perhaps this is best to do on CLI with --hot
   ],
   module: {
@@ -48,7 +56,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader?sourceMap!sass-loader?sourceMap")
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!sass-loader?sourceMap')
       }
     ]
   }
