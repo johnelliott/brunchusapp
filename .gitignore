@@ -4,6 +4,7 @@ node_modules
 .env
 .editorconfig
 public/**/*.gz
+public/**/*.map
 *.mov
 *.txt
 scratch

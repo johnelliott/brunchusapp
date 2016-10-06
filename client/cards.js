@@ -1,3 +1,8 @@
+// load styles here with webpack/javascript because they require the JS to be active to matter
+// TODO check for FOUC
+require("./theme.scss")
+require("./cards.scss")
+
 class Cards {
   constructor () {
     this.cards = Array.from(document.querySelectorAll('.card'))

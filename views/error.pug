@@ -1,5 +1,6 @@
 extends layout.pug
-
+block styles
+  link(rel="stylesheet" href="/style.css" type='text/css')
 block content
   h2 #{statusCode} Gah!
   p #{message}

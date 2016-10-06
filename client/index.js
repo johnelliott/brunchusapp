@@ -1,3 +1,8 @@
+// load styles here with webpack/javascript because they require the JS to be active to matter
+// TODO check for FOUC
+require("./theme.scss")
+require("./form.scss")
+
 const form = document.getElementById('form') // make this by ID
 const addPhoneFieldsNodeList = document.getElementsByClassName('phone-fill')
 const addPhoneFields = Array.prototype.slice.call(addPhoneFieldsNodeList)
