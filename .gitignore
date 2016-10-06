@@ -5,6 +5,8 @@ node_modules
 .editorconfig
 public/**/*.gz
 public/**/*.map
+public/**/*.js*
+public/**/*.css*
 *.mov
 *.txt
 scratch
