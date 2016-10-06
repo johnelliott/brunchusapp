@@ -15,6 +15,21 @@ module.exports = {
     path: path.join(__dirname, 'public'),
     filename: '[name].js'
   },
+  devServer: {
+    // progress: true,
+    hot: true,
+    inline: true,
+    // https: true,
+    // port: 8081,
+    contentBase: path.resolve(__dirname,'public'),
+    proxy: {
+      '!/**/*.{css,js,hot-update.json}': {
+        target: 'http://localhost:3000',
+        secure: false
+        // changeOrigin: true
+      }
+    }
+  },
   devtool: 'source-map',
   // Use the plugin to create page-specific css files built by require in via javascript and link tags in .html and .pug views
   plugins: [
