@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const compression = require('compression')
 const session = require('express-session')
+const RedisStore = require('connect-redis')(session)
 
 // TODO PORT, other env, and .env.test like
 // https://www.twilio.com/docs/tutorials/walkthrough/server-notifications/node/express#configure-twilio-client
@@ -25,7 +26,10 @@ app.set('view engine', 'pug')
 if (app.get('env') === 'production') {
   app.set('trust proxy', 1) // trust first proxy
 }
+// TODO handle losing redis: https://github.com/tj/connect-redis#how-do-i-handle-lost-connections-to-redis
 app.use(session({
+  // store: app.get('env') === 'production' ? new RedisStore({logErrors: process.env === 'development'}) : null,
+  store: new RedisStore({logErrors: true}),
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,

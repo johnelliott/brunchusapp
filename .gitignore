@@ -11,3 +11,4 @@ public/**/*.css*
 *.txt
 scratch
 */certs/*
+dump.rdb
