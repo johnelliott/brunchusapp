@@ -70,7 +70,7 @@ class Cards {
 
     const opacity = 1 - Math.pow(normalizedDragDistance, 3)
 
-    this.target.style.transform = `translateX(${this.screenX}px) rotate(${-rotationDegrees}deg)`
+    this.target.style.transform = `translateY(${-1 * Math.abs(this.screenX / 5)}px) translateX(${this.screenX}px) rotate(${-rotationDegrees}deg)`
     this.target.style.opacity = opacity
 
     if (this.isDraggingCard) {
