@@ -5,7 +5,7 @@
   "short_name": "Brunch.us",
   "description": "decide on brunch with friends",
   "scope": "/",
-  "display": "fullscreen",
+  "display": "minimal-ui",
   "orientation": "any",
   "start_url": "/",
   "theme_color": "#81E7EB",
