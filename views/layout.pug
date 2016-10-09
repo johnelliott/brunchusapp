@@ -28,3 +28,13 @@ html
       h2 #{statusCode} Gah!
       p Message: #{message}
       p #{err}
+    |<script async defer>
+    |  if ('serviceWorker' in navigator) {
+    |    console.log('registering service worker')
+    |    navigator.serviceWorker
+    |    .register('service-worker.js')
+    |    .then(function(){
+    |      console.log('service worker registered')
+    |    })
+    |  }
+    |</script>
