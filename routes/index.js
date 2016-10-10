@@ -4,6 +4,7 @@ const multer = require('multer')
 
 const createOuting = require('./outings/create')
 const viewOuting = require('./outings/view')
+const getRecs = require('./outings/get-recs')
 const magicRedirect = require('./outings/magic-redirect')
 
 const router = express.Router()
@@ -24,5 +25,8 @@ router.get('/outing', function (req, res, next) { res.render('outing') })
 
 /* GET an outing by id, For when we just sent and SMS to the initiating user */
 router.get('/outings/:outing', viewOuting)
+
+/* GET recommendations for an outing */
+router.get('/outings/:outing/recs', getRecs)
 
 module.exports = router

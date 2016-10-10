@@ -52,7 +52,8 @@
     "swipe-cards": "^1.0.0",
     "twilio": "^2.9.3",
     "uglify-js": "^2.6.4",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0",
