@@ -9,6 +9,9 @@ const magicRedirect = require('./outings/magic-redirect')
 const router = express.Router()
 const upload = multer()
 
+/* GET form page */
+router.get('/', function (req, res, next) { res.render('form') })
+
 /* POST form submission. takes multipart form data using upload.array()  */
 router.post('/outings', upload.array(), createOuting)
 
