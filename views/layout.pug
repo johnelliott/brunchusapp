@@ -24,11 +24,11 @@ html
           a(href='/' title='home')
             span(class='huge') 🍳
             span  brunch.us
-    block content
-      //- h1 404
-      h2 #{statusCode} Gah!
-      p Message: #{message}
-      p #{err}
+      block content
+      footer
+        ul
+          li
+            a(href='mailto:brunchus@primitivemachine.com') Contact
     |<script async defer>
     |  if ('serviceWorker' in navigator) {
     |    console.log('registering service worker')
