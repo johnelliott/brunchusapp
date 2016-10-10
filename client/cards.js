@@ -1,6 +1,7 @@
 // load styles here with webpack/javascript because they require the JS to be active to matter
 // TODO check for FOUC
 require("./cards.scss")
+const fetch = require('whatwg-fetch')
 
 class Cards {
   constructor () {
@@ -10,6 +11,7 @@ class Cards {
     this.onEnd = this.onEnd.bind(this)
     this.onMove = this.onMove.bind(this)
     this.update = this.update.bind(this)
+    this.destroyCard = this.destroyCard.bind(this)
     this.moveCardAway = this.moveCardAway.bind(this)
     // no need to bind: this.resetTarget = this.resetTarget.bind(this)
 
@@ -85,7 +87,7 @@ class Cards {
         return
       }
       // TODO Add/call/fire network side-effects here (e.g. Fetch/POST)
-      this.target.parentNode.removeChild(this.target)
+      this.destroyCard(this.target)
       // maintain state of this.cards
       const targetIndex = this.cards.indexOf(this.target)
       this.cards.splice(targetIndex, 1)
@@ -93,6 +95,11 @@ class Cards {
     } else if (isNearlyAtStart) {
       this.resetTarget()
     }
+  }
+
+  destroyCard (domNode) {
+    domNode.parentNode.removeChild(domNode)
+    console.log('NOW WE COULD DO SOMETHING WITH FETCH SIDE EFFECT we have fetch', fetch)
   }
 
   moveCardAway (evt) {
@@ -118,7 +125,7 @@ class Cards {
         return
       }
       evt.target.willChange = ''
-      evt.target.parentNode.removeChild(evt.target)
+      this.destroyCard(evt.target)
 
       // maintain state of this.cards
       const targetIndex = this.cards.indexOf(this.target)
