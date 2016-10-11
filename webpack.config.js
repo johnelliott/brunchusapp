@@ -8,6 +8,7 @@ module.exports = {
     // http://webpack.github.io/docs/multiple-entry-points.html
     form: path.join(__dirname, 'client/index.js'),
     cards: path.join(__dirname, 'client/cards.js'),
+    app: path.join(__dirname, 'client/app.js'),
     style: path.join(__dirname, 'client/style.js'),
   },
   output: {
@@ -25,7 +26,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015']
+          presets: ['react', 'es2015']
         }
       },
       {
