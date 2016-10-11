@@ -6,9 +6,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = {
   entry: {
     // http://webpack.github.io/docs/multiple-entry-points.html
-    form: path.join(__dirname, 'client/index.js'),
-    cards: path.join(__dirname, 'client/cards.js'),
-    style: path.join(__dirname, 'client/style.js')
+    // form: path.join(__dirname, 'client/index.js'),
+    // cards: path.join(__dirname, 'client/cards.js'),
+    // app: path.join(__dirname, 'client/app.js'),
+    app: path.join(__dirname, 'client/app.js')
+    // style: path.join(__dirname, 'client/style.js')
   },
   output: {
     path: path.join(__dirname, 'public'),
@@ -17,21 +19,29 @@ module.exports = {
   devtool: 'source-map',
   // Use the plugin to create page-specific css files built by require in via javascript and link tags in .html and .pug views
   plugins: [
-    new ExtractTextPlugin("[name].css")
+    new ExtractTextPlugin('[name].css')
   ],
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015']
-        }
+        include: [
+          path.resolve(__dirname, 'client', 'components')
+        ],
+        loader: 'babel-loader?presets[]=react,presets[]=es2015'
       },
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   loader: 'babel-loader',
+      //   query: {
+      //     presets: ['es2015']
+      //   }
+      // },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader?sourceMap!sass-loader?sourceMap")
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!sass-loader?sourceMap')
       }
     ]
   }
