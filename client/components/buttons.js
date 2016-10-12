@@ -11,11 +11,11 @@ import React from 'react'
 //   }
 // }
 
-const Card2 = (props) => (
+const Buttons = (props) => (
   <div className='buttons'>
     <button onClick={props.passHandler} className='buttons__pass'>✖︎ Pass</button>
     <button onClick={props.likeHandler} className='buttons__like'>✔ Like</button>
   </div>
 )
 
-export default Card2
+export default Buttons
