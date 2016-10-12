@@ -32,8 +32,16 @@ const cards = [
   }
 ]
 const buttonHandlers = {
-  likeHandler: function likeHandler (evt) { console.log('button handler called', evt) },
-  passHandler: function passHandler (evt) { console.log('button handler called', evt) }
+  passHandler: function passHandler (evt) { console.log('pass button handler called') },
+  likeHandler: function likeHandler (evt) {
+    console.log('like button handler called')
+    // 1 is the top card of two... this is just temporary
+    const topCard = document.getElementsByClassName('card')[1]
+    topCard.style.transform = "translateX(30px)"
+    setTimeout(function() {
+      topCard.style.transform = "none"
+    }, 1500)
+  }
 }
 const topLevelProps = { cards, buttonHandlers }
 

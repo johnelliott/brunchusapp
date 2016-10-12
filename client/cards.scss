@@ -86,3 +86,37 @@
   /*TODO fade this in*/
   display: none;
 }
+
+.example-enter {
+  color: green;
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  color: green;
+  opacity: 1;
+  transition: opacity 1500ms ease-in;
+}
+
+.example-leave {
+  color: red;
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  color: red;
+  opacity: 0.01;
+  transition: opacity 1300ms ease-in;
+}
+
+.example-appear {
+  color: blue;
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+.example-appear.example-appear-active {
+  color: blue;
+  opacity: 1;
+  transition: opacity 1.5s ease-in;
+}
