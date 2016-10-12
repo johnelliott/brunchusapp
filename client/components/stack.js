@@ -5,9 +5,7 @@ const Stack = React.createClass({
   render () {
     return (
       <div className='card-container'>
-        <h1>Stack...</h1>
-        {['yo', 'wat', 'hey']
-        .map(word => <Card className='card' key={word} name={word} />)}
+        {this.props.cards.map(props => <Card className='card' key={props.id} {...props.place} />)}
       </div>
     )
   }

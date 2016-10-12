@@ -9,6 +9,25 @@ import Stack from './stack'
 
 console.log('cards.js is running')
 
-export default 'hello'
-
-render(<div><Stack className='container' /></div>, document.getElementById('root'))
+// This might as well come from an API...
+const recs = [
+  {
+    'id': 1,
+    'place': {
+      'placeId': 1,
+      'name': 'sunrise/sunset',
+      'distance': '0.5mi',
+      'dollarSigns': 2
+    }
+  },
+  {
+    'id': 2,
+    'place': {
+      'placeId': 2,
+      'name': 'little skips',
+      'distance': '0.7mi',
+      'dollarSigns': 2
+    }
+  }
+]
+render(<div><Stack cards={recs}/></div>, document.getElementById('root'))

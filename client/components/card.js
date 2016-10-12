@@ -4,10 +4,12 @@ const Card = React.createClass({
   render () {
     return (
       <div className='card'>
-        <p>I am a card named {this.props.name}</p>
+        <p>{this.props.name}</p>
         <img className="card__image" width="200" height="200" />
         <div className="card__details">
-          <span>💸💸 0.5mi</span>
+          <span>
+            {Array(this.props.dollarSigns + 1).join('💸')} {this.props.distance}
+          </span>
         </div>
       </div>
     )
