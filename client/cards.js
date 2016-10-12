@@ -1,7 +1,7 @@
 // load styles here with webpack/javascript because they require the JS to be active to matter
 // TODO check for FOUC
 require("./cards.scss")
-const fetch = require('whatwg-fetch')
+import 'whatwg-fetch'
 
 class Cards {
   constructor () {
@@ -100,6 +100,13 @@ class Cards {
   destroyCard (domNode) {
     domNode.parentNode.removeChild(domNode)
     console.log('NOW WE COULD DO SOMETHING WITH FETCH SIDE EFFECT we have fetch', fetch)
+    fetch(window.location.pathname + '/recs', {
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.text())
+    .then(json => console.log('we got this from fetch', json))
   }
 
   moveCardAway (evt) {
