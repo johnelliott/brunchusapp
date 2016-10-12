@@ -24,18 +24,16 @@
 .buttons {
   // TODO de-hack positioning/size and really flexbox them
   margin-top: 4.5em;
-  width: 250px;
   display: flex;
-  // flex-direction: row;
   align-items: center;
   button {
+    // line-height: 1.1em;
+    // font-weight: inherit;
+    font-size: 0.75em;
     padding: 0.75em 1.5em;
+    margin: auto 0.5em;
     background-color: white;
     border: none;
-    line-height: 1.1em;
-    // letter-spacing: -0.025em;
-    // font-size: 1.1em;
-    // font-weight: inherit;
     box-shadow: 0px 3px 4px rgba(0,0,0,0.3);
     transition-property: box-shadow, background-color;
     transition-duration: 0.2s;
