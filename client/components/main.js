@@ -39,5 +39,5 @@ const topLevelProps = { cards, buttonHandlers }
 
 render(<div className='container'>
   <Stack {...topLevelProps} />
-  <Buttons {...topLevelProps} />
+  <Buttons {...buttonHandlers} />
 </div>, document.getElementById('root'))
