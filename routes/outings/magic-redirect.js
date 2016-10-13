@@ -19,7 +19,7 @@ module.exports = function fetchOuting (req, res, next) {
   // /outings/_design/findOuting/_view/byMagicLink
   outings.view('findOuting', 'byMagicLink', {reduce: false, key: magicLinkId}, function (err, body) {
     if (err) {
-      debug.error(err)
+      debug(err)
       next(err)
     }
     req.session.user = { phone: body.rows[0].value.phoneNumber }

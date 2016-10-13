@@ -47,7 +47,7 @@ module.exports = function createOuting (req, res, next) {
 
   outings.insert(outing, outing.outingId, function (err, body) {
     if (err) {
-      debug.error(err)
+      debug(err)
       next(err)
     }
     debug('COUCHDB request body', body)
