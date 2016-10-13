@@ -75,7 +75,7 @@ class Card extends React.Component {
     evt.preventDefault()
   }
   onMove (evt) {
-    this.state.currentX = evt.pageX || evt.touches[0].pageX
+    this.state.currentX = evt.pageX >= 0 ? evt.pageX : evt.touches[0].pageX
     // console.log('onMove called', this.state.currentX)
   }
   onEnd (evt) {
