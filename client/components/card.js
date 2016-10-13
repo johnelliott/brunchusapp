@@ -23,20 +23,23 @@ class Card extends React.Component {
     this.state.cardX = 0 // Animation end goal position
     this.state.isDraggingCard = false // Whether or not the card is being dragged by the user
     this.state.isNearlyAtStart = null
+    this.DOMNode = null
   }
   componentDidMount () {
+    this.DOMNode = ReactDOM.findDOMNode(this)
     this.addEventListeners()
   }
   addEventListeners () {
     // These might need to be in reference to the backing instance....
     // or it might just work
-    document.addEventListener('mousedown', this.onStart)
-    document.addEventListener('mousemove', this.onMove)
-    document.addEventListener('mouseup', this.onEnd)
 
-    document.addEventListener('touchstart', this.onStart)
-    document.addEventListener('touchmove', this.onMove)
-    document.addEventListener('touchend', this.onEnd)
+    this.DOMNode.addEventListener('mousedown', this.onStart)
+    this.DOMNode.addEventListener('mousemove', this.onMove)
+    this.DOMNode.addEventListener('mouseup', this.onEnd)
+
+    this.DOMNode.addEventListener('touchstart', this.onStart)
+    this.DOMNode.addEventListener('touchmove', this.onMove)
+    this.DOMNode.addEventListener('touchend', this.onEnd)
     // document.addEventListener('touchcancel', this.onEnd)
     // TODO remove event listeners on unmount
   }
@@ -58,12 +61,9 @@ class Card extends React.Component {
 
     window.requestAnimationFrame(this.updatePosition)
 
-    const thisNode = ReactDOM.findDOMNode(this)
-    // console.log('thisNode', thisNode)
-
     // TODO Add/trigger network side-effects here
 
-    this.state.cardBCR = thisNode.getBoundingClientRect()
+    this.state.cardBCR = this.DOMNode.getBoundingClientRect()
     // console.log('this.state.cardBCR', this.state.cardBCR)
 
     this.state.startX = evt.pageX || evt.touches[0].pageX
@@ -71,7 +71,7 @@ class Card extends React.Component {
 
     this.state.isDraggingCard = true
     // Put the card on it's own layer for better rendering performance
-    thisNode.style.willChange = 'transform'
+    this.DOMNode.style.willChange = 'transform'
     // prevent onMove throttling in chrome
     evt.preventDefault()
   }
@@ -105,9 +105,8 @@ class Card extends React.Component {
 
     const opacity = 1 - Math.pow(normalizedDragDistance, 3)
 
-    const thisNode = ReactDOM.findDOMNode(this)
-    thisNode.style.transform = `translateX(${this.state.screenX}px) rotate(${-rotationDegrees}deg)`
-    thisNode.style.opacity = opacity
+    this.DOMNode.style.transform = `translateX(${this.state.screenX}px) rotate(${-rotationDegrees}deg)`
+    this.DOMNode.style.opacity = opacity
 
     if (this.state.isDraggingCard) {
       return
@@ -131,8 +130,8 @@ class Card extends React.Component {
       // this.animateOtherCardsIntoPosition()
     } else if (isNearlyAtStart) {
       // console.log('card isNearlyAtStart!')
-      thisNode.style.willChange = 'initial'
-      thisNode.style.transform = 'none'
+      this.DOMNode.style.willChange = 'initial'
+      this.DOMNode.style.transform = 'none'
     }
   }
 
