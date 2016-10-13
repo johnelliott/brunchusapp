@@ -43,7 +43,6 @@ class Card extends React.Component {
     console.log('onStart called')
     // Ignore clicks outside a card
     if (!getCardNode(evt.target)) {
-      console.log('evt.path.includes(this)')
       return
     }
     function getCardNode (node) {
