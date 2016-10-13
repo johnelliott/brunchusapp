@@ -41,10 +41,19 @@ class Card extends React.Component {
   }
   onStart (evt) {
     console.log('onStart called')
-    // Ignore not clicking on a card
-    if (!evt.path.map( el => el.className).includes('card')) {
+    // Ignore clicks outside a card
+    if (!getCardNode(evt.target)) {
       console.log('evt.path.includes(this)')
       return
+    }
+    function getCardNode (node) {
+      if (node.matches('.card')) {
+        return true
+      } else if (node.matches('body')) {
+        return false
+      } else {
+        return getCardNode(node.parentElement)
+      }
     }
 
     window.requestAnimationFrame(this.updatePosition)
