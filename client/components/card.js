@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 class Card extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     // because this is an ES6 class, bind this.method to the instance instead of the class
     this.onStart = this.onStart.bind(this)
@@ -19,9 +19,10 @@ class Card extends React.Component {
     this.state.cardBCR = null
     this.state.startX = null // Position on screen where user starts interacting
     this.state.currentX = null // Position of the element within the animations, The startX minus currentX is how far we need to transform the card overall
-    this.state.isDraggingCard = false // Whether or not the card is being dragged by the user
-    this.state.screenX = null // The position of the card on the screen
+    this.state.screenX = 0 // The position of the card on the screen
     this.state.cardX = 0 // Animation end goal position
+    this.state.isDraggingCard = false // Whether or not the card is being dragged by the user
+    this.state.isNearlyAtStart = null
   }
   componentDidMount () {
     this.addEventListeners()
@@ -84,13 +85,56 @@ class Card extends React.Component {
     this.state.isDraggingCard = false
   }
   updatePosition (evt) {
-    // TODO
-    if (this.state.isDraggingCard) {
+    // TODO dry this up with isNearlyAtStart
+    if (this.state.isDraggingCard || Math.abs(this.state.screenX) > 0.1) {
       window.requestAnimationFrame(this.updatePosition)
+      console.log('RAF called')
     }
-    console.log('updatePosition called')
-  }
 
+    if (this.state.isDraggingCard) {
+      this.state.screenX = this.state.currentX - this.state.startX
+    } else {
+      // ease it back in to the start
+      this.state.screenX += (this.state.cardX - this.state.screenX) / 5
+    }
+
+    const normalizedDragDistance =
+      (Math.abs(this.state.screenX) / this.state.cardBCR.width)
+    // TODO get hte math right between ckicking and draggings
+    const rotationDegrees = (this.state.screenX / this.state.cardBCR.width) * 10
+
+    const opacity = 1 - Math.pow(normalizedDragDistance, 3)
+
+    const thisNode = ReactDOM.findDOMNode(this)
+    thisNode.style.transform = `translateX(${this.state.screenX}px) rotate(${-rotationDegrees}deg)`
+    thisNode.style.opacity = opacity
+
+    if (this.state.isDraggingCard) {
+      return
+    }
+
+    // Now, if the user is done dragging we want something else to happen
+    const isNearlyAtStart = (Math.abs(this.state.screenX) < 0.1)
+    const isNearlyInvisible = (opacity < 0.01)
+
+    if (isNearlyInvisible) {
+      // if (!this.state.target || !this.state.target.parentNode) {
+      //   return
+      // }
+      // console.log('card isNearlyInvisible!')
+      // TODO Add/call/fire network side-effects here (e.g. Fetch/POST)
+      // this.state.target.parentNode.removeChild(this.state.target)
+      // maintain state of this.state.cards
+      // removeCard(cardsData.this.state.target)
+      // this.state.cards.splice(targetIndex, 1)
+      // this.render()
+      // this.animateOtherCardsIntoPosition()
+    } else if (isNearlyAtStart) {
+      // console.log('card isNearlyAtStart!')
+      thisNode.style.willChange = 'initial'
+      thisNode.style.transform = 'none'
+    }
+  }
 
   // moveCardAway (evt) {
   //   // get BCR because we don't have any
