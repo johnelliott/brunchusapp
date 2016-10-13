@@ -47,6 +47,7 @@
     "node-uuid": "^1.4.7",
     "pug": "^2.0.0-beta6",
     "react": "^15.3.2",
+    "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
