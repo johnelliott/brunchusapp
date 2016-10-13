@@ -36,18 +36,17 @@ class Card extends React.Component {
     document.addEventListener('touchstart', this.onStart)
     document.addEventListener('touchmove', this.onMove)
     document.addEventListener('touchend', this.onEnd)
+    // document.addEventListener('touchcancel', this.onEnd)
     // TODO remove event listeners on unmount
   }
   onStart (evt) {
     console.log('onStart called')
     // Ignore not clicking on a card
-    // TODO do something smarter like this:
-    // Array.from(evt.target.classList).reduce((prev, curr => curr.match(/card_?/), false)
-    if (!(evt.target.classList.contains('card') ||
-     evt.target.classList.contains('card__image') ||
-     evt.target.classList.contains('card__details'))) {
+    if (!evt.path.map( el => el.className).includes('card')) {
+      console.log('evt.path.includes(this)')
       return
     }
+
     window.requestAnimationFrame(this.updatePosition)
 
     const thisNode = ReactDOM.findDOMNode(this)
