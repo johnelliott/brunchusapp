@@ -1,2 +1,2 @@
 console.log('app.js is running')
-require('./components/main.js')
+require('./components/app.js')
