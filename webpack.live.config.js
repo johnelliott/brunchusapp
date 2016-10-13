@@ -50,6 +50,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
+        // see error in webpack that tells us to use 'react-hot-loader/webpack'
         loaders: ['react-hot-loader/webpack', 'babel-loader?presets[]=react,presets[]=es2015']
       },
       {
