@@ -74,6 +74,10 @@
     0 1em 0.1875em -0.5em rgba(0, 0, 0, 0.1);
 }
 /* Gah I want to use SASS here and style loaders */
+.card__title {
+  line-height: 1.1em;
+  margin: 0.25em auto 0 auto;
+}
 .card__image {
   background-color: $theme-color-yolk;
   margin: 0.75em;
