@@ -25,10 +25,12 @@ class Card extends React.Component {
     this.state.isNearlyAtStart = null
     this.DOMNode = null
   }
+
   componentDidMount () {
     this.DOMNode = ReactDOM.findDOMNode(this)
     this.addEventListeners()
   }
+
   addEventListeners () {
     // These might need to be in reference to the backing instance....
     // or it might just work
@@ -43,6 +45,7 @@ class Card extends React.Component {
     // document.addEventListener('touchcancel', this.onEnd)
     // TODO remove event listeners on unmount
   }
+
   onStart (evt) {
     // console.log('onStart called')
     // Ignore clicks outside a card
@@ -59,11 +62,11 @@ class Card extends React.Component {
       }
     }
 
+    this.state.cardBCR = this.DOMNode.getBoundingClientRect()
     window.requestAnimationFrame(this.updatePosition)
 
     // TODO Add/trigger network side-effects here
 
-    this.state.cardBCR = this.DOMNode.getBoundingClientRect()
     // console.log('this.state.cardBCR', this.state.cardBCR)
 
     this.state.startX = evt.pageX || evt.touches[0].pageX
@@ -75,15 +78,28 @@ class Card extends React.Component {
     // prevent onMove throttling in chrome
     evt.preventDefault()
   }
+
   onMove (evt) {
     this.state.currentX = evt.pageX >= 0 ? evt.pageX : evt.touches[0].pageX
     // console.log('onMove called', this.state.currentX)
   }
+
   onEnd (evt) {
-    // TODO ....
-    // console.log('onEnd called')
+    this.state.cardX = 0
+    let screenX = this.state.currentX - this.state.startX
+    if (!this.state.cardBCR) {
+      this.state.cardBCR = this.DOMNode.getBoundingClientRect()
+    }
+    const dragThreshold = this.state.cardBCR.width * 0.35
+    if (Math.abs(screenX) > dragThreshold) {
+      console.log('we about to stock it to side')
+      this.state.cardX = (screenX > 0)
+      ? this.state.cardBCR.width
+      : -this.state.cardBCR.width
+    }
     this.state.isDraggingCard = false
   }
+
   updatePosition (evt) {
     // TODO dry this up with isNearlyAtStart
     if (this.state.isDraggingCard || Math.abs(this.state.screenX) > 0.1) {
@@ -116,17 +132,16 @@ class Card extends React.Component {
     const isNearlyInvisible = (opacity < 0.01)
 
     if (isNearlyInvisible) {
-      // if (!this.state.target || !this.state.target.parentNode) {
-      //   return
-      // }
-      // console.log('card isNearlyInvisible!')
+      console.log('card isNearlyInvisible!')
       // TODO Add/call/fire network side-effects here (e.g. Fetch/POST)
-      // this.state.target.parentNode.removeChild(this.state.target)
-      // maintain state of this.state.cards
-      // removeCard(cardsData.this.state.target)
-      // this.state.cards.splice(targetIndex, 1)
-      // this.render()
-      // this.animateOtherCardsIntoPosition()
+      // INFO swipe right = like
+      // INFO swipe left = pass
+      const didLike = this.state.cardX >= 0
+      if (didLike) {
+        this.props.handlers.like.bind(this, this.props)
+      } else {
+        this.props.handlers.pass.bind(this, this.props)
+      }
     } else if (isNearlyAtStart) {
       // console.log('card isNearlyAtStart!')
       this.DOMNode.style.willChange = 'initial'

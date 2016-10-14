@@ -31,22 +31,25 @@ const cards = [
     }
   }
 ]
-const buttonHandlers = {
-  pass: function passHandler (evt) { console.log('pass button handler called') },
+
+const handlers = {
+  pass: function passHandler (evt) {
+    console.log('pass handler called')
+    cards.pop() // take off the top card
+    // TODO post like this thing
+    renderApp()
+  },
   like: function likeHandler (evt) {
-    console.log('like button handler called')
-    // 1 is the top card of two... this is just temporary
-    const topCard = document.getElementsByClassName('card')[1]
-    topCard.style.transform = "translateX(200px) rotate(5deg)"
-    setTimeout(function() {
-      topCard.style.transform = "none"
-    }, 1500)
+    console.log('like handler called')
+    cards.pop() // take off the top card
+    // TODO post like this thing
+    renderApp()
   }
 }
-const appProps = { cards, buttonHandlers }
+const appProps = { cards, handlers }
 
 const App = React.createClass({
-  render() {
+  render () {
     return (<div className='container'>
       <Stack {...this.props} />
       <Buttons {...this.props} />
@@ -54,6 +57,9 @@ const App = React.createClass({
   }
 })
 
-render(<div><App {...appProps} /></div>, document.getElementById('root'))
+function renderApp () {
+  render(<div><App {...appProps} /></div>, document.getElementById('root'))
+}
 
+renderApp()
 export default App
