@@ -102,7 +102,7 @@ class Card extends React.Component {
 
   updatePosition (evt) {
     // TODO dry this up with isNearlyAtStart
-    if (this.state.isDraggingCard || Math.abs(this.state.screenX) > 0.1) {
+    if (this.state.isDraggingCard) {
       window.requestAnimationFrame(this.updatePosition)
     }
 
@@ -131,6 +131,10 @@ class Card extends React.Component {
     const isNearlyAtStart = (Math.abs(this.state.screenX) < 0.1)
     const isNearlyInvisible = (opacity < 0.01)
 
+    if (!isNearlyAtStart && !isNearlyInvisible) {
+      window.requestAnimationFrame(this.updatePosition)
+    }
+
     if (isNearlyInvisible) {
       console.log('card isNearlyInvisible!')
       // TODO Add/call/fire network side-effects here (e.g. Fetch/POST)
@@ -138,16 +142,24 @@ class Card extends React.Component {
       // INFO swipe left = pass
       const didLike = this.state.cardX >= 0
       if (didLike) {
-        this.props.handlers.like.bind(this, this.props)
+        this.props.handlers.like()
       } else {
-        this.props.handlers.pass.bind(this, this.props)
+        this.props.handlers.pass()
       }
+
+      // Reset screenX to prevent next requestAnimationFrame...
+      // and this could be done in a better way
+      this.state.screenX = null
     } else if (isNearlyAtStart) {
       // console.log('card isNearlyAtStart!')
       this.DOMNode.style.willChange = 'initial'
       this.DOMNode.style.transform = 'none'
     }
   }
+
+
+
+
 
   // moveCardAway (evt) {
   //   // get BCR because we don't have any
@@ -178,7 +190,7 @@ class Card extends React.Component {
   //     this.state.cards.splice(targetIndex, 1)
   //
   //     this.state.target = null
-  //     this.animateOtherCardsIntoPosition()
+  //     this.transitionEndHelper()
   //   }
   //
   //   this.state.target.addEventListener('transitionend', onAnimationComplete)
