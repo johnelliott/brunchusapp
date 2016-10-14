@@ -10,9 +10,9 @@ const Stack = React.createClass({
         <ReactCSSTransitionGroup
           transitionName='example'
           transitionAppear={true}
-          transitionAppearTimeout={1500}
-          transitionEnterTimeout={1500}
-          transitionLeaveTimeout={1300}>
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
           {this.props.cards.map(props => <Card className='card' ref={`card-key-${props.id}`} key={props.id} handlers={this.props.handlers} {...props.place} />)}
         </ReactCSSTransitionGroup>
       </div>

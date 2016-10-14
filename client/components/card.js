@@ -204,7 +204,7 @@ class Card extends React.Component {
         <img className="card__image" width="200" height="200" />
         <div className="card__details">
           <span>
-            {Array(this.props.dollarSigns + 1).join('💸')} {this.props.distance}
+            {Array(this.props.dollarSigns + 1).join('💸')} {this.props.distance ? ` ${this.props.distance}` : ''}
           </span>
         </div>
       </div>
