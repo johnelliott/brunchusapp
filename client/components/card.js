@@ -44,7 +44,7 @@ class Card extends React.Component {
     // TODO remove event listeners on unmount
   }
   onStart (evt) {
-    console.log('onStart called')
+    // console.log('onStart called')
     // Ignore clicks outside a card
     if (!getCardNode(evt.target)) {
       return
@@ -88,7 +88,6 @@ class Card extends React.Component {
     // TODO dry this up with isNearlyAtStart
     if (this.state.isDraggingCard || Math.abs(this.state.screenX) > 0.1) {
       window.requestAnimationFrame(this.updatePosition)
-      console.log('RAF called')
     }
 
     if (this.state.isDraggingCard) {
@@ -105,7 +104,7 @@ class Card extends React.Component {
 
     const opacity = 1 - Math.pow(normalizedDragDistance, 3)
 
-    this.DOMNode.style.transform = `translateX(${this.state.screenX}px) rotate(${-rotationDegrees}deg)`
+    this.DOMNode.style.transform = `translateX(${this.state.screenX}px) rotate(${-rotationDegrees}deg) translateY(-${Math.abs(this.state.screenX) / 8}px)`
     this.DOMNode.style.opacity = opacity
 
     if (this.state.isDraggingCard) {
@@ -174,7 +173,7 @@ class Card extends React.Component {
   render () {
     return (
       <div className='card'>
-        <p>{this.props.name}</p>
+        <p className="card__title">{this.props.name}</p>
         <img className="card__image" width="200" height="200" />
         <div className="card__details">
           <span>
