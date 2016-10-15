@@ -13,7 +13,7 @@ module.exports = {
     form: path.join(__dirname, 'client/form.js'),
     cards: path.join(__dirname, 'client/cards.js'),
     app: path.join(__dirname, 'client/react-app.js'),
-    style: path.join(__dirname, 'client/theme.scss')
+    style: path.join(__dirname, 'client/style.scss')
   },
   output: {
     path: path.join(__dirname, 'public'),
