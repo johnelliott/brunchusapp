@@ -3,34 +3,8 @@ extends layout.pug
 block styles
   link(rel="stylesheet" href="/cards.css" type='text/css')
 block content
-  <div class="container">
-    <div class="card-container">
-      <div class="card">
-        <img class="card__image" width=200 height=200 />
-        div(class="card__details")
-          span 💸💸 0.5mi
-      </div>
-      <div class="card">
-        <img class="card__image" width=200 height=200 />
-        div(class="card__details")
-          span 💸💸 0.5mi
-      </div>
-      <div class="card">
-        <img class="card__image" width=200 height=200 />
-        div(class="card__details")
-          span 💸💸💸 💸 0.5mi
-      </div>
-      <div class="card">
-        <img class="card__image" width=200 height=200 />
-        div(class="card__details")
-          span 💸 0.5mi
-      </div>
-    </div>
-    <div class='buttons'>
-      <button class="buttons__pass">✖︎ Pass</button>
-      <button class="buttons__like">✔ Like</button>
-    </div>
+  <div class="content">
+    <div id="root">hello this is html</div>
+    <script src="/app.js"></script>
   </div>
-
-  p #{JSON.stringify(data, null, 2)}
-  script(src='/cards.js')
+  script(src='/app.js')
