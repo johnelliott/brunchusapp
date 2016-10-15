@@ -20,4 +20,10 @@ const Stack = React.createClass({
   }
 })
 
+// Prop validation
+// https://facebook.github.io/react/docs/reusable-components.html#prop-validation
+Stack.propTypes = {
+  cards: React.PropTypes.array
+}
+
 export default Stack

@@ -212,4 +212,12 @@ class Card extends React.Component {
   }
 }
 
+// Prop validation
+// https://facebook.github.io/react/docs/reusable-components.html#prop-validation
+Card.propTypes = {
+  id: React.PropTypes.number,
+  distance: React.PropTypes.string,
+  dollarSigns: React.PropTypes.number
+}
+
 export default Card
