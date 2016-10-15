@@ -10,7 +10,7 @@ const CURRENT_IP = require('ip').address()
 module.exports = {
   entry: {
     // http://webpack.github.io/docs/multiple-entry-points.html
-    form: path.join(__dirname, 'client/index.js'),
+    form: path.join(__dirname, 'client/form.js'),
     cards: path.join(__dirname, 'client/cards.js'),
     app: path.join(__dirname, 'client/react-app.js'),
     style: path.join(__dirname, 'client/style.js')
