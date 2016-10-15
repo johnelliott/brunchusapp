@@ -9,7 +9,7 @@ module.exports = {
     form: path.join(__dirname, 'client/form.js'),
     cards: path.join(__dirname, 'client/cards.js'),
     app: path.join(__dirname, 'client/react-app.js'),
-    style: path.join(__dirname, 'client/style.js'),
+    style: path.join(__dirname, 'client/style.js')
   },
   output: {
     path: path.join(__dirname, 'public'),
@@ -17,7 +17,7 @@ module.exports = {
   },
   // Use the plugin to create page-specific css files built by require in via javascript and link tags in .html and .pug views
   plugins: [
-    new ExtractTextPlugin("[name].css")
+    new ExtractTextPlugin('[name].css')
   ],
   module: {
     loaders: [
@@ -31,7 +31,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
       }
     ]
   }

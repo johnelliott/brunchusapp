@@ -7,26 +7,7 @@ import 'whatwg-fetch'
 console.log('cards.js is running')
 
 // This might as well come from an API...
-const cards = [
-  {
-    'id': 1,
-    'place': {
-      'placeId': 1,
-      'name': 'sstatic/sunset',
-      'distance': '0.5mi',
-      'dollarSigns': 2
-    }
-  },
-  {
-    'id': 2,
-    'place': {
-      'placeId': 2,
-      'name': 'static skips',
-      'distance': '1.7mi',
-      'dollarSigns': 2
-    }
-  }
-]
+const cards = []
 fetch(window.location.origin + '/outings/95b719bc-9a95-4526-af8e-e71f73f4fd3c/recs', {
   headers: {
     'Accept': 'application/json'

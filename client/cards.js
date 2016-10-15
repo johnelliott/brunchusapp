@@ -1,6 +1,5 @@
 // load styles here with webpack/javascript because they require the JS to be active to matter
 // TODO check for FOUC
-require("./cards.scss")
 import 'whatwg-fetch'
 
 class Cards {

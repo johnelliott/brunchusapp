@@ -1,5 +1,4 @@
 // TODO eventually copy this into ../cards.js and replace that file
-require('../cards.scss')
 
 import React from 'react'
 import Stack from './stack'
