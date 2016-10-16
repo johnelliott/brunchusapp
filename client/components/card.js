@@ -200,9 +200,11 @@ class Card extends React.Component {
   render () {
     return (
       <div className='card'>
-        <p className="card__title">{this.props.name}</p>
         <img className="card__image" width="200" height="200" />
-        <div className="card__details">
+        <div className="card__foot">
+          <span>
+            {this.props.name}
+          </span>
           <span>
             {Array(this.props.dollarSigns + 1).join('💸')} {this.props.distance ? ` ${this.props.distance}` : ''}
           </span>

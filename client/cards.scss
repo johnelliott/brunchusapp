@@ -13,7 +13,7 @@
 }
 .card-container {
   width: 100%;
-  min-height: 300px;
+  min-height: 350px;
   max-width: 450px;
   /*width: 220px;*/
   padding: 16px;
@@ -23,15 +23,14 @@
 }
 .buttons {
   // TODO de-hack positioning/size and really flexbox them
-  margin-top: 2.5em;
   display: flex;
   align-items: center;
   button {
-    // line-height: 1.1em;
-    // font-weight: inherit;
-    font-size: 0.75em;
-    padding: 0.75em 1.5em;
-    margin: auto 0.5em;
+    font-family: $font-stack;
+    font-size: 2em;
+    padding: 0.25em 1em;
+    min-height: 1em;
+    margin: auto 0.25em;
     background-color: white;
     border: none;
     box-shadow: 0px 3px 4px rgba(0,0,0,0.3);
@@ -46,9 +45,8 @@
 .card {
   box-shadow: 0px 3px 4px rgba(0,0,0,0.3);
   background: #fafafa;
-  padding: 0.5em;
   min-height: 250px;
-  width: 250px;
+  width: 280px;
   position: absolute;
   right: 0;
   left: 0;
@@ -74,16 +72,23 @@
     0 1em 0.1875em -0.5em rgba(0, 0, 0, 0.1);
 }
 /* Gah I want to use SASS here and style loaders */
-.card__title {
-  line-height: 1.1em;
-  margin: 0.25em auto 0 auto;
-}
+// .card__title {
+//   line-height: 1.1em;
+//   margin: 0.25em auto 0 auto;
+// }
 .card__image {
-  background-color: $theme-color-yolk;
-  margin: 0.75em;
+  background-color: lightgrey;
+  height: 250px;
+  width: 100%;
 }
-.card__details {
-  margin: 0.25em auto;
+.card__foot {
+  width: 100%;
+  padding: 0.75em;
+  // font-size: 0.9em;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .card:nth-last-child(n+3) {
   /*TODO fade this in*/
