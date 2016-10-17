@@ -46,6 +46,7 @@
     "nano": "^6.2.0",
     "node-sass": "^3.8.0",
     "node-uuid": "^1.4.7",
+    "oauth": "^0.9.14",
     "pug": "^2.0.0-beta6",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.3.2",
