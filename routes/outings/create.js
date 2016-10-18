@@ -1,4 +1,3 @@
-const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
 const uuid = require('node-uuid')
@@ -6,6 +5,7 @@ const uuid = require('node-uuid')
 const debug = require('debug')('brunch.us:server:routes:outings:create')
 const ip = require('ip')
 const nano = require('nano')(`http://127.0.0.1:${process.env.COUCH_PORT || 5984}`)
+const yelp = require('../../yelp-req.js') // TODO make this les ugly
 const sendSms = require(path.join(__dirname, '..', '..', 'lib/send-twilio-sms.js'))
 
 const outings = nano.use('outings')
@@ -13,7 +13,6 @@ const outings = nano.use('outings')
 // Data we'll need to respond
 const smsLinkHost = `${process.env.ENV === 'development' ? ip.address() : process.process.env.DOMAIN_NAME}:${process.env.PORT || 3000}`
 const validUsPhone = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$/
-const recs = JSON.parse(fs.readFileSync(`lib/recommendations.json`))
 
 module.exports = function createOuting (req, res, next) {
   debug('request body', req.body)
@@ -29,8 +28,9 @@ module.exports = function createOuting (req, res, next) {
     outingId: uuid.v4(),
     createdAt: new Date().toISOString(),
     parties: [],
-    recs
+    recs: []
   }
+
 
   // Create magic links and send messages to the parties involved
   for (let i in validPhoneList) {
@@ -45,14 +45,40 @@ module.exports = function createOuting (req, res, next) {
     sendSms(phoneNumber, `🍳 Let's go to brunch! http://${smsLinkHost}/go/${magicLinkId}`)
   }
 
-  outings.insert(outing, outing.outingId, function (err, body) {
-    if (err) {
-      debug(err)
-      next(err)
-    }
-    debug('COUCHDB request body', body)
-    // debug(`temp recommendations: are just a ${typeof recs}: ${JSON.stringify(recs, null, 2)}`)
-    res.status(201)
-    res.end('ok this is the resoonse of making an outing')
-  })
+  yelp.getYelpBearerToken(process.env.YELP_APP_ID, process.env.YELP_APP_SECRET)
+    .then(yelp.searchYelp)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json()
+      } else {
+        return res.status
+      }
+    })
+    .then(function setRecs (data) {
+      outing.recs = data.businesses
+      .filter(biz => (biz.rating >= 3.3 && !biz.id.match(/Dunkin/i)))
+      .map((biz, index) => {
+        return {
+          id: index,
+          place: {
+            id: biz.id,
+            name: biz.name,
+            image: biz.image_url,
+            dollarSigns: biz.price.length,
+            distance: '0.2mi' // TODO
+          }
+        }
+      })
+      debug(JSON.stringify(outing, null, 2))
+      outings.insert(outing, outing.outingId, function (err, body) {
+        if (err) {
+          debug(err)
+          next(err)
+        }
+        debug('COUCHDB request body', body)
+        // debug(`temp recommendations: are just a ${typeof recs}: ${JSON.stringify(recs, null, 2)}`)
+        res.status(201)
+        res.end('ok this is the resoonse of making an outing')
+      })
+    })
 }

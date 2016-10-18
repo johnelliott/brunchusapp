@@ -200,13 +200,13 @@ class Card extends React.Component {
   render () {
     return (
       <div className='card'>
-        <img className="card__image" width="200" height="200" />
+        <img className="card__image" src={this.props.image} width="200" height="200" />
         <div className="card__foot">
           <span>
             {this.props.name}
           </span>
           <span>
-            {Array(this.props.dollarSigns + 1).join('💸')} {this.props.distance ? ` ${this.props.distance}` : ''}
+            {Array(this.props.dollarSigns + 1).join('💸')}{this.props.distance ? ` ${this.props.distance}` : ''}
           </span>
         </div>
       </div>
@@ -217,8 +217,9 @@ class Card extends React.Component {
 // Prop validation
 // https://facebook.github.io/react/docs/reusable-components.html#prop-validation
 Card.propTypes = {
-  id: React.PropTypes.number,
+  // id: React.PropTypes.number,
   distance: React.PropTypes.string,
+  image: React.PropTypes.string,
   dollarSigns: React.PropTypes.number
 }
 

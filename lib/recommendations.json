@@ -4,6 +4,7 @@
     "place": {
       "placeId": 1,
       "name":"sunrise/sunset",
+      "distance": "0.5mi",
       "dollarSigns": 2
     }
   },
@@ -12,6 +13,7 @@
     "place": {
       "placeId": 2,
       "name":"little skips",
+      "distance": "0.5mi",
       "dollarSigns": 2
     }
   }

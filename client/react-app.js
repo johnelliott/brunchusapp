@@ -8,14 +8,13 @@ console.log('cards.js is running')
 
 // This might as well come from an API...
 const cards = []
-fetch(window.location.origin + '/outings/95b719bc-9a95-4526-af8e-e71f73f4fd3c/recs', {
+fetch(window.location.href + '/recs', {
   headers: {
     'Accept': 'application/json'
   }
 })
 .then(res => res.json())
 .then(json => {
-  console.log('THIS IS HARD_CODED DATA in react-app.js', json)
   // Horribly mutate state
   appState.cards = json
   renderApp()
@@ -23,15 +22,15 @@ fetch(window.location.origin + '/outings/95b719bc-9a95-4526-af8e-e71f73f4fd3c/re
 
 const handlers = {
   pass: function passHandler (evt) {
-    const popped = cards.pop() // take off the top card
-    console.log('pass handler called', popped)
+    appState.cards.pop() // take off the top card
+    console.log('pass handler called')
     // TODO post pass this thing
     renderApp()
   },
   like: function likeHandler (evt) {
     console.log('like handler called')
-    const popped = cards.pop() // take off the top card
-    console.log('like handler called', popped)
+    appState.cards.pop() // take off the top card
+    console.log('like handler called')
     // TODO post like this thing
     renderApp()
   }

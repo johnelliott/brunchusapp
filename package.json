@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "api-debug": "DEBUG=* ENV=development node_modules/nodemon/bin/nodemon.js bin/www",
+    "chrome-debug": "DEBUG=* ENV=development node --inspect --debug-brk bin/www",
     "api-dev": "ENV=development node_modules/nodemon/bin/nodemon.js bin/www",
     "api-inspect": "DEBUG=* ENV=development node_modules/nodemon/bin/nodemon.js --inspect bin/www",
     "start": "node ./bin/www",
@@ -44,6 +45,7 @@
     "morgan": "^1.7.0",
     "multer": "^1.2.0",
     "nano": "^6.2.0",
+    "node-fetch": "^1.6.3",
     "node-sass": "^3.8.0",
     "node-uuid": "^1.4.7",
     "oauth": "^0.9.14",
