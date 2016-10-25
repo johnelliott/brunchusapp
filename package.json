@@ -9,6 +9,7 @@
     "api-dev": "ENV=development node_modules/nodemon/bin/nodemon.js bin/www",
     "api-inspect": "DEBUG=* ENV=development node_modules/nodemon/bin/nodemon.js --inspect bin/www",
     "start": "node ./bin/www",
+    "lint-lte": "find public -size +78k",
     "redis": "redis-server --loglevel verbose",
     "build-client": "node_modules/webpack/bin/webpack.js -p --config webpack.config.js && npm run build-sw",
     "build-sw": "node_modules/sw-precache/cli.js --root=tmp --static-file-globs='public/**/*.{js,css,html,png,ico}' && cp tmp/service-worker.js public/",
